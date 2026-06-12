@@ -34,9 +34,11 @@ export default function Education() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <div className="edu-card-badge">Education</div>
-          <div className="edu-icon">
-            <HiOutlineAcademicCap />
+          <div className="edu-card-header">
+            <div className="edu-icon">
+              <HiOutlineAcademicCap />
+            </div>
+            <div className="edu-card-badge">{t('educationBadge')}</div>
           </div>
           <div className="edu-card-content">
             <h3>{t('educationDegree')}</h3>

@@ -1021,6 +1021,11 @@ img { max-width: 100%; display: block; }
 }
 
 .main-edu-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  transition: all var(--transition-med);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -1029,10 +1034,31 @@ img { max-width: 100%; display: block; }
   height: 100%;
 }
 
+.main-edu-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.edu-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.edu-card-header .edu-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  background: var(--accent-blue-dim);
+  color: var(--accent-blue);
+}
+
 .edu-card-badge {
-  position: absolute;
-  top: 20px;
-  right: 20px;
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;

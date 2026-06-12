@@ -1,0 +1,200 @@
+{
+  "professional": [
+    {
+      "id": "azure_ml",
+      "title": "Azure Machine Learning Associate",
+      "issuer": "Microsoft",
+      "date": "2026",
+      "file": "Sertifikasi/Sertif Keahlian/AzureAICert_Nizar.pdf",
+      "type": "professional",
+      "url": ""
+    },
+    {
+      "id": "tf_dev",
+      "title": "TensorFlow Developer Certificate",
+      "issuer": "Google",
+      "date": "2026",
+      "file": "Sertifikasi/Sertif Keahlian/Akhmad_Nizar_Z_TensorFlow_Certificate.pdf",
+      "type": "professional",
+      "url": ""
+    }
+  ],
+  "training": [
+    {
+      "title": "Crash Course on Python",
+      "issuer": "Google",
+      "date": "Feb 26, 2023",
+      "url": "https://coursera.org/verify/4M24CQ5L9RUS",
+      "type": "course",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of Coursera 4M24CQ5L9RUS.pdf"
+    },
+    {
+      "title": "Using Python to Interact with the Operating System",
+      "issuer": "Google",
+      "date": "Feb 28, 2023",
+      "url": "https://coursera.org/verify/3ANQEBP6HQR8",
+      "type": "course",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of Coursera 3ANQEBP6HQR8.pdf"
+    },
+    {
+      "title": "Introduction to Git and GitHub",
+      "issuer": "Google",
+      "date": "Mar 2, 2023",
+      "url": "https://coursera.org/verify/N8YYG973CXC2",
+      "type": "course",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of Coursera N8YYG973CXC2.pdf"
+    },
+    {
+      "title": "Troubleshooting and Debugging Techniques",
+      "issuer": "Google",
+      "date": "Mar 3, 2023",
+      "url": "https://coursera.org/verify/2H6GUHPKK3JU",
+      "type": "course",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of Coursera 2H6GUHPKK3JU.pdf"
+    },
+    {
+      "title": "Google IT Automation with Python Professional Certificate",
+      "issuer": "Google",
+      "date": "Jul 20, 2023",
+      "url": "https://coursera.org/verify/professional-cert/WNRG4EWKPUYF",
+      "type": "professional_cert",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of Google IT Automation with Python.pdf"
+    },
+    {
+      "title": "Foundations: Data, Data, Everywhere",
+      "issuer": "Google",
+      "date": "Mar 7, 2023",
+      "url": "https://coursera.org/verify/KKB34H2HKHL4",
+      "type": "course",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of Coursera KKB34H2HKHL4.pdf"
+    },
+    {
+      "title": "Ask Questions to Make Data-Driven Decisions",
+      "issuer": "Google",
+      "date": "Mar 8, 2023",
+      "url": "https://coursera.org/verify/ZQZ4WDD5ZKJH",
+      "type": "course",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of Coursera ZQZ4WDD5ZKJH.pdf"
+    },
+    {
+      "title": "Prepare Data for Exploration",
+      "issuer": "Google",
+      "date": "Mar 9, 2023",
+      "url": "https://coursera.org/verify/XXLXNB84756B",
+      "type": "course",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of Coursera XXLXNB84756B.pdf"
+    },
+    {
+      "title": "Process Data from Dirty to Clean",
+      "issuer": "Google",
+      "date": "Mar 12, 2023",
+      "url": "https://coursera.org/verify/GWGGK46KKMR7",
+      "type": "course",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of Coursera GWGGK46KKMR7.pdf"
+    },
+    {
+      "title": "Analyze Data to Answer Questions",
+      "issuer": "Google",
+      "date": "Mar 13, 2023",
+      "url": "https://coursera.org/verify/WYTTZB9DJGFR",
+      "type": "course",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of WYTTZB9DJGFR.pdf"
+    },
+    {
+      "title": "Share Data Through the Art of Visualization",
+      "issuer": "Google",
+      "date": "Mar 14, 2023",
+      "url": "https://coursera.org/verify/RERQQX4ZFZEV",
+      "type": "course",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of RERQQX4ZFZEV.pdf"
+    },
+    {
+      "title": "Google Data Analytics Professional Certificate",
+      "issuer": "Google",
+      "date": "Jul 22, 2023",
+      "url": "https://coursera.org/verify/professional-cert/X5XQ6NBCN4PT",
+      "type": "professional_cert",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of Google Data Analytics Certification.pdf"
+    },
+    {
+      "title": "Mathematics for Machine Learning Specialization",
+      "issuer": "Imperial College London",
+      "date": "Mar 28, 2023",
+      "url": "https://coursera.org/verify/specialization/SH3E3H69K764",
+      "type": "specialization",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of Coursera SH3E3H69K764.pdf"
+    },
+    {
+      "title": "Machine Learning Specialization",
+      "issuer": "DeepLearning.AI",
+      "date": "Apr 11, 2023",
+      "url": "https://coursera.org/verify/specialization/YRZQ297623DN",
+      "type": "specialization",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of Coursera YRZQ297623DN.pdf"
+    },
+    {
+      "title": "TensorFlow: Data and Deployment Specialization",
+      "issuer": "DeepLearning.AI",
+      "date": "May 24, 2023",
+      "url": "https://coursera.org/verify/specialization/Z2DGR2EQE4F4",
+      "type": "specialization",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of Coursera Z2DGR2EQE4F4.pdf"
+    },
+    {
+      "title": "TensorFlow Developer Professional Certificate",
+      "issuer": "DeepLearning.AI",
+      "date": "May 10, 2023",
+      "url": "https://coursera.org/verify/professional-cert/3PJNPRK8JUU8",
+      "type": "professional_cert",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of Coursera 3PJNPRK8JUU8.pdf"
+    },
+    {
+      "title": "Python (Basic) Certificate",
+      "issuer": "HackerRank",
+      "date": "Feb 2023",
+      "url": "https://www.hackerrank.com/certificates/6938df13b28b",
+      "type": "course",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of python_basic certificate.pdf"
+    },
+    {
+      "title": "Memulai Pemrograman Dengan Python",
+      "issuer": "Dicoding",
+      "date": "22 Feb 2023",
+      "url": "https://dicoding.com/certificates/N9ZO4JMR8ZG5",
+      "type": "course",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of sertifikat_course_86_1099694_220223212959.pdf"
+    },
+    {
+      "title": "Pengenalan ke Logika Pemrograman (Programming Logic 101)",
+      "issuer": "Dicoding",
+      "date": "19 Feb 2023",
+      "url": "https://dicoding.com/certificates/JLX1LRV3JX72",
+      "type": "course",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of sertifikat_course_302_1099694_190223090422.pdf"
+    },
+    {
+      "title": "Memulai Dasar Pemrograman untuk Menjadi Pengembang Software",
+      "issuer": "Dicoding",
+      "date": "17 Feb 2023",
+      "url": "https://dicoding.com/certificates/6RPN6OQQ9P2M",
+      "type": "course",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of sertifikat_course_237_1099694_170223200543.pdf"
+    },
+    {
+      "title": "Belajar Dasar Visualisasi Data",
+      "issuer": "Dicoding",
+      "date": "21 Feb 2023",
+      "url": "https://dicoding.com/certificates/JLX1LJJLJX72",
+      "type": "course",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of sertifikat_course_177_1099694_210223133132.pdf"
+    },
+    {
+      "title": "Belajar Dasar Git dengan GitHub",
+      "issuer": "Dicoding",
+      "date": "19 Feb 2023",
+      "url": "https://dicoding.com/certificates/QLZ92OO47X5D",
+      "type": "course",
+      "file": "Sertifikasi/Sertif Pelatihan/Copy of sertifikat_course_317_1099694_190223132555.pdf"
+    }
+  ]
+}

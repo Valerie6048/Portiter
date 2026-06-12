@@ -56,7 +56,7 @@ export default function ProjectDetail() {
       <div className="detail-header-bar">
         <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <button className="back-btn" onClick={() => navigate('/')}>
-            <FiArrowLeft /> <span>Portiter</span>
+            <FiArrowLeft /> <span>Akhmad Nizar Z.</span>
           </button>
           {project.github && (
             <a href={project.github} target="_blank" rel="noopener noreferrer" className="github-link-btn">
@@ -94,6 +94,51 @@ export default function ProjectDetail() {
           </div>
           <h1 className="detail-title">{project.title}</h1>
           <p className="detail-subtitle">{project.subtitle}</p>
+        </motion.div>
+
+        {/* Project Visual Banner Placeholder */}
+        <motion.div 
+          className={`detail-visual-banner ${project.color}`}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.05 }}
+        >
+          <div className="banner-glow" />
+          <div className="banner-pattern">
+            {project.color === 'blue' && (
+              <svg width="100%" height="100%" viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="400" cy="150" r="100" stroke="var(--accent-blue)" strokeWidth="2" strokeDasharray="8 8" opacity="0.3" />
+                <circle cx="400" cy="150" r="60" stroke="var(--accent-blue)" strokeWidth="3" opacity="0.5" />
+                <path d="M 200 150 L 340 150 M 460 150 L 600 150" stroke="var(--accent-blue)" strokeWidth="2" opacity="0.4" />
+                <path d="M 400 50 L 400 90 M 400 210 L 400 250" stroke="var(--accent-blue)" strokeWidth="2" opacity="0.4" />
+                <circle cx="200" cy="150" r="6" fill="var(--accent-blue)" />
+                <circle cx="600" cy="150" r="6" fill="var(--accent-blue)" />
+                <text x="400" y="155" fill="var(--accent-blue)" fontSize="13" fontWeight="700" letterSpacing="4" textAnchor="middle">AI / RAG PIPELINE</text>
+              </svg>
+            )}
+            {project.color === 'purple' && (
+              <svg width="100%" height="100%" viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 150 220 Q 250 80 350 160 T 550 100 T 700 180" stroke="var(--accent-purple)" strokeWidth="4" opacity="0.7" />
+                <path d="M 150 250 Q 250 120 350 200 T 550 140 T 700 220" stroke="var(--accent-purple)" strokeWidth="2" strokeDasharray="4 4" opacity="0.4" />
+                <circle cx="350" cy="160" r="6" fill="var(--accent-purple)" />
+                <circle cx="550" cy="100" r="6" fill="var(--accent-purple)" />
+                <text x="400" y="50" fill="var(--accent-purple)" fontSize="13" fontWeight="700" letterSpacing="4" textAnchor="middle">FORECASTING & OPTIMIZATION</text>
+              </svg>
+            )}
+            {project.color === 'green' && (
+              <svg width="100%" height="100%" viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="250" y="80" width="100" height="140" rx="8" stroke="var(--accent-green)" strokeWidth="2" opacity="0.5" />
+                <rect x="450" y="80" width="100" height="140" rx="8" stroke="var(--accent-green)" strokeWidth="2" opacity="0.5" />
+                <path d="M 350 150 H 450" stroke="var(--accent-green)" strokeWidth="3" strokeDasharray="6 6" opacity="0.8" />
+                <circle cx="350" cy="150" r="5" fill="var(--accent-green)" />
+                <circle cx="450" cy="150" r="5" fill="var(--accent-green)" />
+                <text x="400" y="260" fill="var(--accent-green)" fontSize="13" fontWeight="700" letterSpacing="4" textAnchor="middle">MLOPS / DATA INFRASTRUCTURE</text>
+              </svg>
+            )}
+          </div>
+          <div className="banner-overlay">
+            <span>Visual Concept Placeholder</span>
+          </div>
         </motion.div>
 
         {/* Use Case */}

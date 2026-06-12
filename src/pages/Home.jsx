@@ -1,5 +1,6 @@
 import Header from '../components/Header';
 import Hero from '../components/Hero';
+import Experience from '../components/Experience';
 import ProjectGrid from '../components/ProjectGrid';
 import BundleSection from '../components/BundleSection';
 import SkillsSection from '../components/SkillsSection';
@@ -13,6 +14,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <Experience />
         <ProjectGrid />
         <BundleSection />
         <SkillsSection />

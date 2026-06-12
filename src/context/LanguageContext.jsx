@@ -5,6 +5,7 @@ const LanguageContext = createContext();
 const translations = {
   en: {
     // Header
+    navExperience: 'Experience',
     navProjects: 'Projects',
     navSkills: 'Skills',
     navContact: 'Contact',
@@ -15,6 +16,9 @@ const translations = {
       'Specialist in end-to-end AI solutions, RAG systems, and large-scale forecasting across healthcare and marketing analytics domains.',
     heroDownloadCV: 'Download CV',
     heroContactMe: 'Contact Me',
+    heroStatsProjects: 'Projects',
+    heroStatsCerts: 'Certifications',
+    heroStatsGPA: 'GPA',
 
     // Filter
     filterAll: 'All Projects',
@@ -59,6 +63,32 @@ const translations = {
     bundleSubtitle: 'From Raw Data to Deployed ML Systems',
     bundleCollab: "Let's Collaborate",
 
+    // Experience
+    experienceTitle: 'Professional Experience',
+    experienceRole: 'Machine Learning Engineer',
+    experienceCompany: 'Devdat',
+    experienceLocation: 'Jakarta, Indonesia (Remote)',
+    experiencePeriod: 'May 2024 - Present',
+    experienceSummary: 'As a Machine Learning Engineer and AI Data Scientist, I specialize in developing end-to-end AI solutions, from advanced RAG systems to high-precision forecasting models. I focus on optimizing large-scale data pipelines and implementing production-grade Generative AI applications within the healthcare and marketing analytics domains.',
+    experienceCategoryGenAI: 'Generative AI & Clinical Intelligence',
+    experienceCategoryPredictive: 'Predictive Modeling & Marketing Science',
+    experienceCategoryMLOps: 'MLOps & Analytics Infrastructure',
+    experienceGenAIHighlights: [
+      'Developed an automated system to extract data from Clinical Research Forms (eCRF) into structured JSON formats optimized for HTML rendering.',
+      'Architected a Clinical Trial Matching System (CTMS) for oncology utilizing Retrieval-Augmented Generation (RAG) and SLM/LLM reasoning to optimize patient-trial alignment.',
+      'Built a context-aware recommendation engine for Adverse Events (CTCAE) using RAG and LLMs to provide precise clinical reasoning.',
+      'Conducted modality support assessments (Text, Image, Audio, Video) for various frontier models like Gemini, GPT, and Claude to ensure platform compatibility.'
+    ],
+    experiencePredictiveHighlights: [
+      'Engineered business-grade time-series forecasting models with integrated output guardrails and probabilistic ranges (P10, P50, P90) to ensure realistic business outputs.',
+      'Optimized forecasting accuracy for high-seasonality periods, specifically addressing Ramadhan impacts through hyperparameter tuning and seasonality adjustments.',
+      'Developed machine learning models for marketing budget allocation using regression and Bayesian optimization to maximize cross-channel performance.'
+    ],
+    experienceMLOpsHighlights: [
+      'Built an internal cost calculation engine to estimate token, video, and storage costs for Azure AI services, providing granular usage transparency.',
+      'Implemented video content analysis and creative deduplication using Azure Video Indexer and Computer Vision APIs to optimize engagement insights.'
+    ],
+
     // Skills
     skillsTitle: 'Technical Arsenal',
     skillsLanguages: 'Languages',
@@ -71,6 +101,13 @@ const translations = {
     educationUniversity: 'Universitas Brawijaya',
     educationGPA: 'GPA 3.73 / 4.0',
     certifications: 'Certifications',
+    certificationsSectionTitle: 'Education & Certifications',
+    professionalCerts: 'Professional Certifications',
+    trainingAndCourses: 'Training & Courses',
+    verifyCredential: 'Verify Credential',
+    viewCertificate: 'View Certificate',
+    showAll: 'Show All',
+    showLess: 'Show Less',
     certAzure: 'Azure Machine Learning Associate',
     certAzureIssuer: 'Microsoft',
     certTF: 'TensorFlow Developer Certificate',
@@ -106,6 +143,7 @@ const translations = {
 
   id: {
     // Header
+    navExperience: 'Pengalaman',
     navProjects: 'Proyek',
     navSkills: 'Keahlian',
     navContact: 'Kontak',
@@ -116,6 +154,9 @@ const translations = {
       'Spesialis dalam solusi AI end-to-end, sistem RAG, dan forecasting skala besar pada domain healthcare serta marketing analytics.',
     heroDownloadCV: 'Unduh CV',
     heroContactMe: 'Hubungi Saya',
+    heroStatsProjects: 'Proyek',
+    heroStatsCerts: 'Sertifikasi',
+    heroStatsGPA: 'IPK',
 
     // Filter
     filterAll: 'Semua Proyek',
@@ -160,6 +201,32 @@ const translations = {
     bundleSubtitle: 'Dari Data Mentah hingga Sistem ML yang Siap Produksi',
     bundleCollab: 'Mari Berkolaborasi',
 
+    // Experience
+    experienceTitle: 'Pengalaman Kerja',
+    experienceRole: 'Machine Learning Engineer',
+    experienceCompany: 'Devdat',
+    experienceLocation: 'Jakarta, Indonesia (Remote)',
+    experiencePeriod: 'Mei 2024 - Sekarang',
+    experienceSummary: 'Sebagai Machine Learning Engineer dan AI Data Scientist, saya berspesialisasi dalam mengembangkan solusi AI end-to-end, mulai dari sistem RAG canggih hingga model forecasting dengan presisi tinggi. Saya fokus pada optimalisasi pipeline data skala besar dan penerapan aplikasi Generative AI siap-produksi pada domain healthcare serta marketing analytics.',
+    experienceCategoryGenAI: 'Generative AI & Kecerdasan Klinis',
+    experienceCategoryPredictive: 'Pemodelan Prediktif & Marketing Science',
+    experienceCategoryMLOps: 'Infrastruktur MLOps & Analitik',
+    experienceGenAIHighlights: [
+      'Mengembangkan sistem otomatis untuk mengekstrak data dari Clinical Research Forms (eCRF) menjadi format JSON terstruktur yang dioptimalkan untuk rendering HTML.',
+      'Merancang arsitektur Clinical Trial Matching System (CTMS) untuk onkologi menggunakan Retrieval-Augmented Generation (RAG) dan penalaran SLM/LLM untuk mengoptimalkan pencocokan pasien-uji klinis.',
+      'Membangun mesin rekomendasi context-aware untuk Adverse Events (CTCAE) menggunakan RAG dan LLM untuk memberikan penalaran klinis yang tepat.',
+      'Melakukan asesmen dukungan modalitas (Teks, Gambar, Audio, Video) untuk berbagai model frontier seperti Gemini, GPT, dan Claude untuk memastikan kompatibilitas platform.'
+    ],
+    experiencePredictiveHighlights: [
+      'Membangun model forecasting time-series tingkat bisnis dengan guardrail output terintegrasi dan rentang probabilistik (P10, P50, P90) untuk memastikan output bisnis yang realistis.',
+      'Mengoptimalkan akurasi forecasting untuk periode musiman tinggi, khususnya mengatasi dampak Ramadhan melalui tuning hyperparameter dan penyesuaian musim.',
+      'Mengembangkan model machine learning untuk alokasi anggaran pemasaran menggunakan regresi dan optimasi Bayesian untuk memaksimalkan performa lintas saluran.'
+    ],
+    experienceMLOpsHighlights: [
+      'Membangun mesin penghitung biaya internal untuk mengestimasi biaya token, video, dan penyimpanan untuk layanan Azure AI, memberikan transparansi penggunaan yang mendetail.',
+      'Mengimplementasikan analisis konten video dan deduplikasi kreatif menggunakan Azure Video Indexer dan Computer Vision API untuk mengoptimalkan insight interaksi.'
+    ],
+
     // Skills
     skillsTitle: 'Arsenal Teknis',
     skillsLanguages: 'Bahasa Pemrograman',
@@ -172,6 +239,13 @@ const translations = {
     educationUniversity: 'Universitas Brawijaya',
     educationGPA: 'IPK 3.73 / 4.0',
     certifications: 'Sertifikasi',
+    certificationsSectionTitle: 'Pendidikan & Sertifikasi',
+    professionalCerts: 'Sertifikasi Profesional',
+    trainingAndCourses: 'Pelatihan & Kursus',
+    verifyCredential: 'Verifikasi Kredensial',
+    viewCertificate: 'Lihat Sertifikat',
+    showAll: 'Tampilkan Semua',
+    showLess: 'Tampilkan Lebih Sedikit',
     certAzure: 'Azure Machine Learning Associate',
     certAzureIssuer: 'Microsoft',
     certTF: 'TensorFlow Developer Certificate',

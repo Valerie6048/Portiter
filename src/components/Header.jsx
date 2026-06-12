@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { useTheme } from '../context/ThemeContext';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
+import { FiSun, FiMoon } from 'react-icons/fi';
+import mainLogo from '../assets/main_logo.png';
 
 export default function Header() {
   const { language, setLanguage, t } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navItems = [
+    { key: 'navExperience', href: '#experience' },
     { key: 'navProjects', href: '#projects' },
     { key: 'navSkills', href: '#skills' },
     { key: 'navContact', href: '#contact' },
@@ -22,7 +27,10 @@ export default function Header() {
     <>
       <header className="header">
         <div className="header-inner">
-          <a href="#" className="header-logo">Portiter</a>
+          <a href="#" className="header-logo">
+            <img src={mainLogo} alt="Logo" className="header-logo-img" />
+            <span>Akhmad Nizar Z.</span>
+          </a>
 
           <nav className="header-nav">
             {navItems.map((item) => (
@@ -37,6 +45,14 @@ export default function Header() {
           </nav>
 
           <div className="header-right">
+            <button
+              className="theme-toggle"
+              onClick={toggleTheme}
+              aria-label="Toggle dark/light theme"
+            >
+              {theme === 'dark' ? <FiSun size={18} /> : <FiMoon size={18} />}
+            </button>
+
             <div className="lang-toggle">
               <button
                 className={language === 'en' ? 'active' : ''}

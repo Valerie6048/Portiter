@@ -1,10 +1,19 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { HiOutlineLocationMarker, HiOutlineMail } from 'react-icons/hi';
 import { FiLinkedin, FiGithub } from 'react-icons/fi';
 
 export default function Contact() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const [copied, setCopied] = useState(false);
+
+  const handleEmailClick = (e) => {
+    // We still allow default mailto behavior, but also copy to clipboard
+    navigator.clipboard.writeText('akhmad.nizar021@gmail.com');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const contacts = [
     {
@@ -57,14 +66,21 @@ export default function Contact() {
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         {contacts.map((c, i) => {
+          const isEmail = c.href && c.href.startsWith('mailto:');
           const Tag = c.href ? 'a' : 'div';
+          const onClick = isEmail ? handleEmailClick : undefined;
           const linkProps = c.href
-            ? { href: c.href, target: c.href.startsWith('http') ? '_blank' : undefined, rel: 'noopener noreferrer' }
+            ? { 
+                href: c.href, 
+                target: c.href.startsWith('http') ? '_blank' : undefined, 
+                rel: 'noopener noreferrer',
+                onClick
+              }
             : {};
           return (
             <Tag className="contact-card" key={i} {...linkProps}>
               <div className="contact-icon">{c.icon}</div>
-              <span>{c.label}</span>
+              <span>{isEmail && copied ? (language === 'id' ? 'Tersalin!' : 'Copied!') : c.label}</span>
             </Tag>
           );
         })}

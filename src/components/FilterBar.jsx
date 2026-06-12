@@ -31,7 +31,7 @@ export default function FilterBar({ activeFilter, onFilterChange }) {
           <FiArrowUpRight size={14} />
         </a>
         <a
-          href="https://github.com/akhmadnizar"
+          href="https://github.com/Valerie6048"
           target="_blank"
           rel="noopener noreferrer"
           className="btn-ghost"

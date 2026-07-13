@@ -9,7 +9,7 @@ export default function Contact() {
   const [copied, setCopied] = useState(false);
 
   const handleEmailClick = (e) => {
-    // We still allow default mailto behavior, but also copy to clipboard
+    e.preventDefault();
     navigator.clipboard.writeText('akhmad.nizar021@gmail.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -29,7 +29,7 @@ export default function Contact() {
     {
       icon: <FiLinkedin />,
       label: 'LinkedIn',
-      href: 'https://linkedin.com/in/akhmadnizar',
+      href: 'https://www.linkedin.com/in/akhmad-nizar-zakaria-8a692b229/',
     },
     {
       icon: <FiGithub />,

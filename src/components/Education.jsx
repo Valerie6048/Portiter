@@ -105,17 +105,18 @@ export default function Education() {
         
         <motion.div 
           className="training-certs-grid"
-          layout
+          layout="position"
         >
-          <AnimatePresence mode="popLayout">
+          <AnimatePresence>
             {visibleTrainingCerts.map((cert) => (
               <motion.div
                 key={cert.file}
                 className="training-cert-card"
-                layout
+                layout="position"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
+                whileHover={{ y: -4 }}
                 transition={{ duration: 0.3 }}
               >
                 <div className="training-cert-header">

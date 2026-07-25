@@ -75,13 +75,13 @@ export default function ProjectGrid() {
     : projects.filter((p) => p.category === filter);
 
   return (
-    <>
+    <section id="projects">
       <FilterBar activeFilter={filter} onFilterChange={setFilter} />
       <div className="project-grid">
         {filtered.map((p) => (
           <ProjectCard key={p.id} {...p} />
         ))}
       </div>
-    </>
+    </section>
   );
 }

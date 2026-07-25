@@ -27,6 +27,10 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
       >
+        <span className="status-pill">
+          <span className="status-dot" />
+          {t('heroStatusAvailable')}
+        </span>
         <h1 className="hero-name">
           <span className="gradient-text">Akhmad Nizar</span>
           <br />

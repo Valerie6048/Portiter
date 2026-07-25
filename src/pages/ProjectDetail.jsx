@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
@@ -16,6 +17,23 @@ export default function ProjectDetail() {
   const { language } = useLanguage();
 
   const project = projectDetails[language]?.[projectId] || projectDetails.en?.[projectId];
+
+  useEffect(() => {
+    if (project) {
+      document.title = `${project.title} — Akhmad Nizar Z.`;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', `${project.subtitle} — ${project.title}. Portfolio project by Akhmad Nizar Zakaria.`);
+      }
+    }
+    return () => {
+      document.title = 'Akhmad Nizar Z. — Portfolio';
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', 'Akhmad Nizar Z. — Portfolio of Akhmad Nizar Zakaria. Machine Learning Engineer & AI Data Scientist specializing in end-to-end AI solutions, RAG systems, and large-scale forecasting.');
+      }
+    };
+  }, [project]);
 
   if (!project) {
     return (

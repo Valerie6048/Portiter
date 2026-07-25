@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 const LanguageContext = createContext();
 
@@ -140,6 +140,9 @@ const translations = {
       'AI agent for chart analysis and market insights',
       'Sentiment analysis for selected assets',
     ],
+
+    // Hero Status
+    heroStatusAvailable: 'Available for AI/ML Roles',
   },
 
   id: {
@@ -279,11 +282,19 @@ const translations = {
       'Agen AI untuk analisis chart dan insight pasar',
       'Analisis sentimen untuk aset terpilih',
     ],
+
+    // Hero Status
+    heroStatusAvailable: 'Tersedia untuk Peran AI/ML',
   },
 };
 
 export function LanguageProvider({ children }) {
   const [language, setLanguage] = useState('en');
+
+  // Sync HTML lang attribute with selected language for SEO
+  useEffect(() => {
+    document.documentElement.lang = language === 'id' ? 'id' : 'en';
+  }, [language]);
 
   const t = (key) => {
     return translations[language]?.[key] || translations.en[key] || key;

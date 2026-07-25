@@ -1,7 +1,7 @@
 from PIL import Image, ImageColor
 
 # Path to the uploaded image and output path
-input_path = r"C:\Users\ml_devdat\.gemini\antigravity-ide\brain\542364a4-2763-4793-9bc0-c8ccc9640312\media__1784990723518.jpg"
+input_path = r"C:\Users\ml_devdat\local_projects\Portiter\public\Akhmad Nizar Zakaria.png"
 output_path = r"c:\Users\ml_devdat\local_projects\Portiter\public\og_image.jpg"
 
 try:

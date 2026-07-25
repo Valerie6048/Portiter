@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { HiOutlineSparkles, HiOutlineChartBar, HiOutlineServer, HiOutlineLocationMarker, HiOutlineCalendar } from 'react-icons/hi';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
@@ -103,24 +103,28 @@ export default function Experience() {
                     {isOpen ? <FiChevronUp className="exp-acc-chevron" /> : <FiChevronDown className="exp-acc-chevron" />}
                   </button>
 
-                  {isOpen && (
-                    <motion.div 
-                      className="exp-acc-content"
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <ul className="exp-highlights-list">
-                        {Array.isArray(highlights) && highlights.map((hl, idx) => (
-                          <li key={idx} className="exp-highlight-item">
-                            <span className="exp-bullet" />
-                            <p>{hl}</p>
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.div>
-                  )}
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div 
+                        key="content"
+                        className="exp-acc-content"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        style={{ overflow: 'hidden' }}
+                      >
+                        <ul className="exp-highlights-list">
+                          {Array.isArray(highlights) && highlights.map((hl, idx) => (
+                            <li key={idx} className="exp-highlight-item">
+                              <span className="exp-bullet" />
+                              <p>{hl}</p>
+                            </li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               );
             })}

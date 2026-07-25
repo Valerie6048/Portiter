@@ -8,12 +8,6 @@ export default function Contact() {
   const { t, language } = useLanguage();
   const [copied, setCopied] = useState(false);
 
-  const handleEmailClick = (e) => {
-    e.preventDefault();
-    navigator.clipboard.writeText('akhmad.nizar021@gmail.com');
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   const contacts = [
     {
@@ -67,20 +61,42 @@ export default function Contact() {
       >
         {contacts.map((c, i) => {
           const isEmail = c.href && c.href.startsWith('mailto:');
+          
+          if (isEmail) {
+            return (
+              <div className="contact-email-wrapper" key={i} style={{ display: 'flex', gap: '12px', width: '100%' }}>
+                <a href={c.href} className="contact-card" style={{ flex: 1 }}>
+                  <div className="contact-icon">{c.icon}</div>
+                  <span>{c.label}</span>
+                </a>
+                <button 
+                  className="contact-card" 
+                  onClick={() => {
+                    navigator.clipboard.writeText('akhmad.nizar021@gmail.com');
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                  }}
+                  style={{ flex: 'none', padding: '0 24px', cursor: 'pointer' }}
+                  title="Copy Email"
+                >
+                  <span>{copied ? (language === 'id' ? 'Tersalin! ✨' : 'Copied! ✨') : (language === 'id' ? 'Salin' : 'Copy')}</span>
+                </button>
+              </div>
+            );
+          }
+
           const Tag = c.href ? 'a' : 'div';
-          const onClick = isEmail ? handleEmailClick : undefined;
           const linkProps = c.href
             ? { 
                 href: c.href, 
                 target: c.href.startsWith('http') ? '_blank' : undefined, 
-                rel: 'noopener noreferrer',
-                onClick
+                rel: 'noopener noreferrer'
               }
             : {};
           return (
             <Tag className="contact-card" key={i} {...linkProps}>
               <div className="contact-icon">{c.icon}</div>
-              <span>{isEmail && copied ? (language === 'id' ? 'Tersalin!' : 'Copied!') : c.label}</span>
+              <span>{c.label}</span>
             </Tag>
           );
         })}

@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://portiter.vercel.app/</loc>
+    <loc>https://akhmdnzr.fun/</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://portiter.vercel.app/token-counter</loc>
+    <loc>https://akhmdnzr.fun/token-counter</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://portiter.vercel.app/project/genai</loc>
+    <loc>https://akhmdnzr.fun/project/genai</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://portiter.vercel.app/project/predictive</loc>
+    <loc>https://akhmdnzr.fun/project/predictive</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://portiter.vercel.app/project/mlops</loc>
+    <loc>https://akhmdnzr.fun/project/mlops</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://portiter.vercel.app/project/cafe</loc>
+    <loc>https://akhmdnzr.fun/project/cafe</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://portiter.vercel.app/project/crypto</loc>
+    <loc>https://akhmdnzr.fun/project/crypto</loc>
     <priority>0.7</priority>
   </url>
 </urlset>

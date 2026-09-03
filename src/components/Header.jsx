@@ -1,47 +1,82 @@
 import { useState } from 'react';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
-import { FiSun, FiMoon } from 'react-icons/fi';
+import { FiSun, FiMoon, FiZap } from 'react-icons/fi';
 import mainLogo from '../assets/main_logo.png';
 
 export default function Header() {
   const { language, setLanguage, t } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const navItems = [
-    { key: 'navExperience', href: '#experience' },
-    { key: 'navProjects', href: '#projects' },
-    { key: 'navSkills', href: '#skills' },
-    { key: 'navContact', href: '#contact' },
+    { key: 'navExperience', href: '#experience', type: 'anchor' },
+    { key: 'navProjects', href: '#projects', type: 'anchor' },
+    { key: 'navSkills', href: '#skills', type: 'anchor' },
+    { key: 'navTokenCounter', path: '/token-counter', type: 'route', badge: 'AI Tool' },
+    { key: 'navContact', href: '#contact', type: 'anchor' },
   ];
 
-  const handleNavClick = (e, href) => {
-    e.preventDefault();
+  const handleItemClick = (e, item) => {
     setMobileOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+
+    if (item.type === 'route') {
+      // Direct route navigation handled by Link or navigate
+      return;
+    }
+
+    if (item.type === 'anchor') {
+      e.preventDefault();
+      if (location.pathname === '/') {
+        document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        navigate(`/${item.href}`);
+        setTimeout(() => {
+          document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
   };
 
   return (
     <>
       <header className="header">
         <div className="header-inner">
-          <a href="#" className="header-logo">
+          <Link to="/" className="header-logo">
             <img src={mainLogo} alt="Logo" className="header-logo-img" />
             <span>Akhmad Nizar Z.</span>
-          </a>
+          </Link>
 
           <nav className="header-nav">
-            {navItems.map((item) => (
-              <a
-                key={item.key}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-              >
-                {t(item.key)}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              if (item.type === 'route') {
+                return (
+                  <Link
+                    key={item.key}
+                    to={item.path}
+                    className={`nav-link-route ${location.pathname === item.path ? 'active' : ''}`}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <span className="nav-route-text">{t(item.key)}</span>
+                    {item.badge && <span className="nav-badge-pill">{item.badge}</span>}
+                  </Link>
+                );
+              }
+
+              return (
+                <a
+                  key={item.key}
+                  href={item.href}
+                  onClick={(e) => handleItemClick(e, item)}
+                >
+                  {t(item.key)}
+                </a>
+              );
+            })}
           </nav>
 
           <div className="header-right">
@@ -80,15 +115,31 @@ export default function Header() {
       </header>
 
       <div className={`mobile-menu ${mobileOpen ? 'open' : ''}`}>
-        {navItems.map((item) => (
-          <a
-            key={item.key}
-            href={item.href}
-            onClick={(e) => handleNavClick(e, item.href)}
-          >
-            {t(item.key)}
-          </a>
-        ))}
+        {navItems.map((item) => {
+          if (item.type === 'route') {
+            return (
+              <Link
+                key={item.key}
+                to={item.path}
+                className={`mobile-nav-link ${location.pathname === item.path ? 'active' : ''}`}
+                onClick={() => setMobileOpen(false)}
+              >
+                <span>{t(item.key)}</span>
+                {item.badge && <span className="nav-badge-pill">{item.badge}</span>}
+              </Link>
+            );
+          }
+
+          return (
+            <a
+              key={item.key}
+              href={item.href}
+              onClick={(e) => handleItemClick(e, item)}
+            >
+              {t(item.key)}
+            </a>
+          );
+        })}
       </div>
     </>
   );

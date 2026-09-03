@@ -143,6 +143,36 @@ const translations = {
 
     // Hero Status
     heroStatusAvailable: 'Available for AI/ML Roles',
+
+    // AI Token Counter & Multi-Page
+    navTokenCounter: 'Token Counter',
+    tcBadge: 'Free AI Utility',
+    tcTitle: 'AI Token Counter',
+    tcSubtitle: 'Instant, private, and accurate token counter for OpenAI o3/o1/GPT-4o, Claude 3.7/3.5, Gemini 2.0, DeepSeek-R1, and LLaMA 3.3. 100% computed in your browser.',
+    tcInputPlaceholder: 'Paste or type your text/prompt here to calculate tokens in real time...',
+    tcTokens: 'Total Tokens',
+    tcCharacters: 'Characters',
+    tcWords: 'Words',
+    tcLines: 'Lines',
+    tcPaste: 'Paste',
+    tcClear: 'Clear',
+    tcSample: 'Sample Prompt',
+    tcCopyStats: 'Copy Stats',
+    tcCopied: 'Copied!',
+    tcSelectModel: 'Target Model',
+    tcModelProvider: 'Provider',
+    tcModelContext: 'Max Context',
+    tcModelVocab: 'Vocab / Encoding',
+    tcReasoningBadge: 'Reasoning Model',
+    tcContextUsage: 'Context Window Usage',
+    tcPrivacyNotice: '100% Client-Side: Your text is processed locally in your browser and never sent to any server.',
+    tcInfoTitle: 'Modern LLM Tokenization (2025/2026)',
+    tcInfoWhatIsToken: 'What is a Token?',
+    tcInfoWhatIsTokenDesc: 'Tokens are the fundamental building blocks processed by Large Language Models. Frontier models like OpenAI o3/o1/GPT-4o (o200k_base), Gemini 2.0 (256k SentencePiece), DeepSeek-R1 (128k BPE), and Claude 3.7 utilize dense vocabulary tokenizers that drastically improve compression and multilingual efficiency.',
+    tcInfoWhyMatters: 'Context Windows & Reasoning Tokens',
+    tcInfoWhyMattersDesc: 'Modern reasoning models (OpenAI o3-mini, o1, DeepSeek-R1, Claude 3.7 Sonnet) generate internal thinking tokens alongside response tokens. Monitoring token counts helps prevent context overflow and optimizes API costs.',
+    tcBackToHome: 'Back to Portfolio',
+    tcExploreProjects: 'View AI Projects',
   },
 
   id: {
@@ -285,6 +315,36 @@ const translations = {
 
     // Hero Status
     heroStatusAvailable: 'Tersedia untuk Peran AI/ML',
+
+    // AI Token Counter & Multi-Page
+    navTokenCounter: 'Token Counter',
+    tcBadge: 'Utilitas AI Gratis',
+    tcTitle: 'AI Token Counter',
+    tcSubtitle: 'Penghitung token instan, privat, dan akurat untuk OpenAI o3/o1/GPT-4o, Claude 3.7/3.5, Gemini 2.0, DeepSeek-R1, dan LLaMA 3.3. 100% diproses di browser Anda.',
+    tcInputPlaceholder: 'Tempel atau ketik teks/prompt Anda di sini untuk menghitung jumlah token secara langsung...',
+    tcTokens: 'Total Token',
+    tcCharacters: 'Karakter',
+    tcWords: 'Kata',
+    tcLines: 'Baris',
+    tcPaste: 'Tempel',
+    tcClear: 'Bersihkan',
+    tcSample: 'Contoh Teks',
+    tcCopyStats: 'Salin Statistik',
+    tcCopied: 'Tersalin!',
+    tcSelectModel: 'Pilih Model Target',
+    tcModelProvider: 'Penyedia',
+    tcModelContext: 'Kapasitas Context',
+    tcModelVocab: 'Kamus / Encoding',
+    tcReasoningBadge: 'Model Penalaran (Reasoning)',
+    tcContextUsage: 'Penggunaan Context Window',
+    tcPrivacyNotice: '100% Sisi Klien: Teks Anda diproses secara lokal di browser dan tidak pernah dikirim ke server mana pun.',
+    tcInfoTitle: 'Tokenisasi Model AI Terkini (2025/2026)',
+    tcInfoWhatIsToken: 'Apa itu Token?',
+    tcInfoWhatIsTokenDesc: 'Token adalah unit dasar pemrosesan teks pada Large Language Model. Model mutakhir seperti OpenAI o3/o1/GPT-4o (o200k_base), Gemini 2.0 (256k SentencePiece), DeepSeek-R1 (128k BPE), dan Claude 3.7 menggunakan kamus kosakata besar yang sangat efisien dalam kompresi teks dan multibahasa.',
+    tcInfoWhyMatters: 'Context Window & Reasoning Tokens',
+    tcInfoWhyMattersDesc: 'Model penalaran terkini (OpenAI o3-mini, o1, DeepSeek-R1, Claude 3.7 Sonnet) menghasilkan token penalaran internal (thinking tokens). Menghitung estimasi token membantu mencegah limit context terlampaui dan mengoptimalkan efisiensi biaya API.',
+    tcBackToHome: 'Kembali ke Portofolio',
+    tcExploreProjects: 'Lihat Proyek AI',
   },
 };
 

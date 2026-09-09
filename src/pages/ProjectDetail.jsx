@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { projectDetails } from '../data/projectDetails';
 import { FiArrowLeft, FiExternalLink, FiTarget, FiTool, FiAward, FiCpu, FiChevronRight } from 'react-icons/fi';
+import { setPageSeo, HOME_SEO } from '../utils/seo';
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -20,20 +21,16 @@ export default function ProjectDetail() {
 
   useEffect(() => {
     if (project) {
-      document.title = `${project.title} — Akhmad Nizar Z.`;
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) {
-        metaDesc.setAttribute('content', `${project.subtitle} — ${project.title}. Portfolio project by Akhmad Nizar Zakaria.`);
-      }
+      setPageSeo({
+        title: `${project.title} — Akhmad Nizar Z.`,
+        description: `${project.subtitle} — ${project.title}. Portfolio project by Akhmad Nizar Zakaria.`,
+        path: `/project/${projectId}`,
+      });
     }
     return () => {
-      document.title = 'Akhmad Nizar Z. — Portfolio';
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) {
-        metaDesc.setAttribute('content', 'Akhmad Nizar Z. — Portfolio of Akhmad Nizar Zakaria. Machine Learning Engineer & AI Data Scientist specializing in end-to-end AI solutions, RAG systems, and large-scale forecasting.');
-      }
+      setPageSeo(HOME_SEO);
     };
-  }, [project]);
+  }, [project, projectId]);
 
   if (!project) {
     return (
@@ -95,12 +92,7 @@ export default function ProjectDetail() {
         >
           <Link to="/" className="breadcrumb-link">Home</Link>
           <FiChevronRight className="breadcrumb-sep" />
-          <span className="breadcrumb-link" onClick={() => {
-            navigate('/');
-            setTimeout(() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' }), 100);
-          }} style={{ cursor: 'pointer' }}>
-            Projects
-          </span>
+          <a href="/#projects" className="breadcrumb-link">Projects</a>
           <FiChevronRight className="breadcrumb-sep" />
           <span className="breadcrumb-current">{project.title}</span>
         </motion.nav>

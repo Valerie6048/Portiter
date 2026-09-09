@@ -3,7 +3,7 @@ import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
-import { FiSun, FiMoon, FiZap } from 'react-icons/fi';
+import { FiSun, FiMoon } from 'react-icons/fi';
 import mainLogo from '../assets/main_logo.png';
 
 export default function Header() {
@@ -107,6 +107,8 @@ export default function Header() {
               className="hamburger"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-navigation"
             >
               {mobileOpen ? <HiX size={22} /> : <HiMenuAlt3 size={22} />}
             </button>
@@ -114,7 +116,7 @@ export default function Header() {
         </div>
       </header>
 
-      <div className={`mobile-menu ${mobileOpen ? 'open' : ''}`}>
+      <div id="mobile-navigation" className={`mobile-menu ${mobileOpen ? 'open' : ''}`}>
         {navItems.map((item) => {
           if (item.type === 'route') {
             return (

@@ -1,8 +1,11 @@
 {
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/token-counter", "destination": "/index.html" },
+    { "source": "/project/genai", "destination": "/index.html" },
+    { "source": "/project/predictive", "destination": "/index.html" },
+    { "source": "/project/mlops", "destination": "/index.html" },
+    { "source": "/project/cafe", "destination": "/index.html" },
+    { "source": "/project/crypto", "destination": "/index.html" }
   ]
 }

@@ -3,15 +3,15 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { FiArrowRight, FiInfo } from 'react-icons/fi';
 
+function CardLink({ children, color, link, isInternal }) {
+  if (!link) return <span className={`card-link ${color}`} style={{ opacity: 0.5, cursor: 'default' }}>{children}</span>;
+  if (isInternal) return <Link to={link} className={`card-link ${color}`}>{children}</Link>;
+  return <a href={link} target="_blank" rel="noopener noreferrer" className={`card-link ${color}`}>{children}</a>;
+}
+
 export default function ProjectCard({ color, icon, titleKey, subtitleKey, featuresKey, techs, link, isInternal }) {
   const { t } = useLanguage();
   const features = t(featuresKey);
-
-  const LinkWrapper = ({ children }) => {
-    if (!link) return <span className={`card-link ${color}`} style={{ opacity: 0.5, cursor: 'default' }}>{children}</span>;
-    if (isInternal) return <Link to={link} className={`card-link ${color}`}>{children}</Link>;
-    return <a href={link} target="_blank" rel="noopener noreferrer" className={`card-link ${color}`}>{children}</a>;
-  };
 
   return (
     <motion.div
@@ -40,9 +40,9 @@ export default function ProjectCard({ color, icon, titleKey, subtitleKey, featur
             <span className="tech-badge" key={tech}>{tech}</span>
           ))}
         </div>
-        <LinkWrapper>
+        <CardLink color={color} link={link} isInternal={isInternal}>
           {t('projectViewDetails')} <FiArrowRight />
-        </LinkWrapper>
+        </CardLink>
       </div>
     </motion.div>
   );

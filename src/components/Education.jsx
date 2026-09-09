@@ -67,7 +67,11 @@ export default function Education() {
                 <div className="pro-cert-info">
                   <h4>{cert.title}</h4>
                   <p className="pro-cert-issuer">{cert.issuer}</p>
-                  <p className="pro-cert-date">{cert.date}</p>
+                  <p className="pro-cert-date">
+                    {cert.dateIssued
+                      ? `${t('issued')} ${cert.dateIssued} · ${t('expires')} ${cert.dateExpires}`
+                      : cert.date}
+                  </p>
                 </div>
                 <div className="pro-cert-actions">
                   {cert.url && (

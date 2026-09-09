@@ -17,7 +17,7 @@ const translations = {
     heroDownloadCV: 'Download CV',
     heroContactMe: 'Contact Me',
     heroStatsProjects: 'Projects',
-    heroStatsCerts: 'Certifications',
+    heroStatsCerts: 'Certificates & Courses',
     heroStatsGPA: 'GPA',
 
     // Filter
@@ -105,6 +105,8 @@ const translations = {
     certificationsSectionTitle: 'Education & Certifications',
     professionalCerts: 'Professional Certifications',
     trainingAndCourses: 'Training & Courses',
+    issued: 'Issued',
+    expires: 'Expires',
     verifyCredential: 'Verify Credential',
     viewCertificate: 'View Certificate',
     showAll: 'Show All',
@@ -148,8 +150,9 @@ const translations = {
     navTokenCounter: 'Token Counter',
     tcBadge: 'Free AI Utility',
     tcTitle: 'AI Token Counter',
-    tcSubtitle: 'Instant, private, and accurate token counter for OpenAI o3/o1/GPT-4o, Claude 3.7/3.5, Gemini 2.0, DeepSeek-R1, and LLaMA 3.3. 100% computed in your browser.',
-    tcInputPlaceholder: 'Paste or type your text/prompt here to calculate tokens in real time...',
+    tcSubtitle: 'Instant, private token estimates for current OpenAI, Claude, Gemini, and DeepSeek models. OpenAI counts use the o200k_base tokenizer; other providers are browser-side estimates.',
+    tcInputLabel: 'Text or prompt to count',
+    tcInputPlaceholder: 'Paste or type your text/prompt here to estimate tokens in real time...',
     tcTokens: 'Total Tokens',
     tcCharacters: 'Characters',
     tcWords: 'Words',
@@ -164,13 +167,14 @@ const translations = {
     tcModelContext: 'Max Context',
     tcModelVocab: 'Vocab / Encoding',
     tcReasoningBadge: 'Reasoning Model',
+    tcEstimateBadge: 'Browser Estimate',
     tcContextUsage: 'Context Window Usage',
     tcPrivacyNotice: '100% Client-Side: Your text is processed locally in your browser and never sent to any server.',
-    tcInfoTitle: 'Modern LLM Tokenization (2025/2026)',
+    tcInfoTitle: 'Current LLM Tokenization',
     tcInfoWhatIsToken: 'What is a Token?',
-    tcInfoWhatIsTokenDesc: 'Tokens are the fundamental building blocks processed by Large Language Models. Frontier models like OpenAI o3/o1/GPT-4o (o200k_base), Gemini 2.0 (256k SentencePiece), DeepSeek-R1 (128k BPE), and Claude 3.7 utilize dense vocabulary tokenizers that drastically improve compression and multilingual efficiency.',
+    tcInfoWhatIsTokenDesc: 'Tokens are the building blocks processed by Large Language Models. This tool uses the OpenAI o200k_base tokenizer directly and provides estimates for providers whose official tokenizers are not bundled in the browser.',
     tcInfoWhyMatters: 'Context Windows & Reasoning Tokens',
-    tcInfoWhyMattersDesc: 'Modern reasoning models (OpenAI o3-mini, o1, DeepSeek-R1, Claude 3.7 Sonnet) generate internal thinking tokens alongside response tokens. Monitoring token counts helps prevent context overflow and optimizes API costs.',
+    tcInfoWhyMattersDesc: 'Context limits and billing depend on the exact provider model and request structure. Use this result as a planning estimate; system prompts, tools, images, and provider-specific formatting can change the final count.',
     tcBackToHome: 'Back to Portfolio',
     tcExploreProjects: 'View AI Projects',
   },
@@ -189,7 +193,7 @@ const translations = {
     heroDownloadCV: 'Unduh CV',
     heroContactMe: 'Hubungi Saya',
     heroStatsProjects: 'Proyek',
-    heroStatsCerts: 'Sertifikasi',
+    heroStatsCerts: 'Sertifikat & Kursus',
     heroStatsGPA: 'IPK',
 
     // Filter
@@ -277,6 +281,8 @@ const translations = {
     certificationsSectionTitle: 'Pendidikan & Sertifikasi',
     professionalCerts: 'Sertifikasi Profesional',
     trainingAndCourses: 'Pelatihan & Kursus',
+    issued: 'Diperoleh',
+    expires: 'Berlaku hingga',
     verifyCredential: 'Verifikasi Kredensial',
     viewCertificate: 'Lihat Sertifikat',
     showAll: 'Tampilkan Semua',
@@ -320,8 +326,9 @@ const translations = {
     navTokenCounter: 'Token Counter',
     tcBadge: 'Utilitas AI Gratis',
     tcTitle: 'AI Token Counter',
-    tcSubtitle: 'Penghitung token instan, privat, dan akurat untuk OpenAI o3/o1/GPT-4o, Claude 3.7/3.5, Gemini 2.0, DeepSeek-R1, dan LLaMA 3.3. 100% diproses di browser Anda.',
-    tcInputPlaceholder: 'Tempel atau ketik teks/prompt Anda di sini untuk menghitung jumlah token secara langsung...',
+    tcSubtitle: 'Estimasi token instan dan privat untuk model OpenAI, Claude, Gemini, dan DeepSeek terbaru. Tokenizer o200k_base digunakan untuk OpenAI; provider lain dihitung sebagai estimasi di browser.',
+    tcInputLabel: 'Teks atau prompt yang dihitung',
+    tcInputPlaceholder: 'Tempel atau ketik teks/prompt Anda untuk mengestimasi token secara langsung...',
     tcTokens: 'Total Token',
     tcCharacters: 'Karakter',
     tcWords: 'Kata',
@@ -336,13 +343,14 @@ const translations = {
     tcModelContext: 'Kapasitas Context',
     tcModelVocab: 'Kamus / Encoding',
     tcReasoningBadge: 'Model Penalaran (Reasoning)',
+    tcEstimateBadge: 'Estimasi Browser',
     tcContextUsage: 'Penggunaan Context Window',
     tcPrivacyNotice: '100% Sisi Klien: Teks Anda diproses secara lokal di browser dan tidak pernah dikirim ke server mana pun.',
-    tcInfoTitle: 'Tokenisasi Model AI Terkini (2025/2026)',
+    tcInfoTitle: 'Tokenisasi Model AI Terkini',
     tcInfoWhatIsToken: 'Apa itu Token?',
-    tcInfoWhatIsTokenDesc: 'Token adalah unit dasar pemrosesan teks pada Large Language Model. Model mutakhir seperti OpenAI o3/o1/GPT-4o (o200k_base), Gemini 2.0 (256k SentencePiece), DeepSeek-R1 (128k BPE), dan Claude 3.7 menggunakan kamus kosakata besar yang sangat efisien dalam kompresi teks dan multibahasa.',
+    tcInfoWhatIsTokenDesc: 'Token adalah unit dasar pemrosesan teks pada Large Language Model. Tool ini memakai tokenizer OpenAI o200k_base secara langsung dan memberikan estimasi untuk provider yang tokenizernya tidak tersedia di browser.',
     tcInfoWhyMatters: 'Context Window & Reasoning Tokens',
-    tcInfoWhyMattersDesc: 'Model penalaran terkini (OpenAI o3-mini, o1, DeepSeek-R1, Claude 3.7 Sonnet) menghasilkan token penalaran internal (thinking tokens). Menghitung estimasi token membantu mencegah limit context terlampaui dan mengoptimalkan efisiensi biaya API.',
+    tcInfoWhyMattersDesc: 'Batas context dan biaya bergantung pada model serta struktur request provider. Gunakan hasil ini sebagai estimasi perencanaan; system prompt, tools, gambar, dan format khusus provider dapat mengubah jumlah akhir.',
     tcBackToHome: 'Kembali ke Portofolio',
     tcExploreProjects: 'Lihat Proyek AI',
   },
@@ -371,6 +379,7 @@ export function LanguageProvider({ children }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useLanguage() {
   const context = useContext(LanguageContext);
   if (!context) {

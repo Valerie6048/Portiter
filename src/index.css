@@ -94,6 +94,20 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+section[id] { scroll-margin-top: 96px; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 body {
   font-family: var(--font-family);
   background-color: var(--bg-primary);
@@ -164,6 +178,7 @@ img { max-width: 100%; display: block; }
   font-size: 1.3rem;
   font-weight: 800;
   letter-spacing: -0.5px;
+  white-space: nowrap;
 }
 
 .header-logo span {
@@ -1850,10 +1865,28 @@ img { max-width: 100%; display: block; }
   .btn-primary, .btn-ghost { width: 100%; justify-content: center; min-height: 48px; }
   .contact-cards { flex-direction: column; }
   .contact-card { width: 100%; justify-content: center; }
+  .contact-email-wrapper { flex-direction: column; }
+  .contact-email-wrapper .contact-card { width: 100%; min-width: 0; }
+  .contact-email-wrapper > button.contact-card { min-height: 48px; }
+  .contact-email-wrapper .contact-card span { overflow-wrap: anywhere; }
   .breadcrumbs { font-size: 0.78rem; gap: 6px; }
   
   .pro-cert-actions { flex-direction: column; gap: 8px; }
   .pro-cert-actions .btn-cert-action { width: 100%; }
+}
+
+@media (max-width: 900px) {
+  .header-nav { display: none; }
+  .hamburger { display: flex; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* ===== MULTI-PAGE & ROUTE NAV BADGES ===== */
@@ -2138,6 +2171,20 @@ img { max-width: 100%; display: block; }
   font-weight: 700;
 }
 
+.tc-specs-badge-estimate {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: var(--accent-blue-dim);
+  border: 1px solid var(--accent-blue);
+  color: var(--accent-blue);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
 /* Context bar */
 .tc-context-bar-container {
   background: var(--bg-card);
@@ -2286,6 +2333,11 @@ img { max-width: 100%; display: block; }
   font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, monospace, var(--font-family);
   font-size: 0.95rem;
   line-height: 1.6;
+}
+
+.tc-textarea:focus {
+  box-shadow: 0 0 0 3px var(--accent-blue-dim);
+  border-radius: var(--radius-sm);
 }
 
 .tc-textarea::placeholder {

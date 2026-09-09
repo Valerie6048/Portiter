@@ -1,8 +1,9 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { getEncoding } from 'js-tiktoken';
 import { useLanguage } from '../context/LanguageContext';
+import { setPageSeo, HOME_SEO } from '../utils/seo';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import {
@@ -23,6 +24,127 @@ import {
 
 // Verified Frontier Models Catalog
 const LLM_MODELS = [
+  // Current catalog (provider names checked against official model documentation)
+  {
+    id: 'gpt-5-6-sol',
+    name: 'GPT-5.6 Sol',
+    provider: 'OpenAI',
+    group: 'OpenAI GPT-5.6',
+    encoding: 'o200k_base',
+    contextWindow: 1050000,
+    vocabSize: 'o200k_base',
+    type: 'Frontier Reasoning & Coding',
+    isReasoning: true,
+    isEstimate: false,
+  },
+  {
+    id: 'gpt-5-6-terra',
+    name: 'GPT-5.6 Terra',
+    provider: 'OpenAI',
+    group: 'OpenAI GPT-5.6',
+    encoding: 'o200k_base',
+    contextWindow: 1050000,
+    vocabSize: 'o200k_base',
+    type: 'Balanced General Purpose',
+    isReasoning: true,
+    isEstimate: false,
+  },
+  {
+    id: 'gpt-5-6-luna',
+    name: 'GPT-5.6 Luna',
+    provider: 'OpenAI',
+    group: 'OpenAI GPT-5.6',
+    encoding: 'o200k_base',
+    contextWindow: 1050000,
+    vocabSize: 'o200k_base',
+    type: 'Fast & Cost Efficient',
+    isReasoning: false,
+    isEstimate: false,
+  },
+  {
+    id: 'claude-opus-5',
+    name: 'Claude Opus 5',
+    provider: 'Anthropic',
+    group: 'Anthropic Claude 5',
+    encoding: 'cl100k_base',
+    contextWindow: 200000,
+    vocabSize: 'Provider tokenizer (estimate)',
+    type: 'Complex Reasoning',
+    isReasoning: true,
+    isEstimate: true,
+  },
+  {
+    id: 'claude-sonnet-5',
+    name: 'Claude Sonnet 5',
+    provider: 'Anthropic',
+    group: 'Anthropic Claude 5',
+    encoding: 'cl100k_base',
+    contextWindow: 200000,
+    vocabSize: 'Provider tokenizer (estimate)',
+    type: 'Balanced Coding & Analysis',
+    isReasoning: true,
+    isEstimate: true,
+  },
+  {
+    id: 'claude-haiku-4-5',
+    name: 'Claude Haiku 4.5',
+    provider: 'Anthropic',
+    group: 'Anthropic Claude 4.5',
+    encoding: 'cl100k_base',
+    contextWindow: 200000,
+    vocabSize: 'Provider tokenizer (estimate)',
+    type: 'Fast & Efficient',
+    isReasoning: false,
+    isEstimate: true,
+  },
+  {
+    id: 'gemini-3-8-flash',
+    name: 'Gemini 3.8 Flash',
+    provider: 'Google DeepMind',
+    group: 'Google Gemini 3',
+    encoding: 'o200k_base',
+    contextWindow: 1048576,
+    vocabSize: 'Provider tokenizer (estimate)',
+    type: 'Stable Multimodal Flash',
+    isReasoning: false,
+    isEstimate: true,
+  },
+  {
+    id: 'gemini-3-1-pro',
+    name: 'Gemini 3.1 Pro (Preview)',
+    provider: 'Google DeepMind',
+    group: 'Google Gemini 3',
+    encoding: 'o200k_base',
+    contextWindow: 1048576,
+    vocabSize: 'Provider tokenizer (estimate)',
+    type: 'Advanced Reasoning & Coding',
+    isReasoning: true,
+    isEstimate: true,
+  },
+  {
+    id: 'deepseek-v4-pro',
+    name: 'DeepSeek V4 Pro',
+    provider: 'DeepSeek',
+    group: 'DeepSeek V4',
+    encoding: 'cl100k_base',
+    contextWindow: 128000,
+    vocabSize: 'Provider tokenizer (estimate)',
+    type: 'Reasoning & Coding',
+    isReasoning: true,
+    isEstimate: true,
+  },
+  {
+    id: 'deepseek-v4-flash',
+    name: 'DeepSeek V4 Flash',
+    provider: 'DeepSeek',
+    group: 'DeepSeek V4',
+    encoding: 'cl100k_base',
+    contextWindow: 128000,
+    vocabSize: 'Provider tokenizer (estimate)',
+    type: 'Fast General Purpose',
+    isReasoning: false,
+    isEstimate: true,
+  },
   // OpenAI (o-Series & GPT-4o)
   {
     id: 'gpt-4o',
@@ -243,6 +365,19 @@ const LLM_MODELS = [
   }
 ];
 
+const CURRENT_MODEL_IDS = new Set([
+  'gpt-5-6-sol',
+  'gpt-5-6-terra',
+  'gpt-5-6-luna',
+  'claude-opus-5',
+  'claude-sonnet-5',
+  'claude-haiku-4-5',
+  'gemini-3-8-flash',
+  'gemini-3-1-pro',
+  'deepseek-v4-pro',
+  'deepseek-v4-flash',
+]);
+
 const SAMPLE_TEXT_EN = `Retrieval-Augmented Generation (RAG) is an AI architecture that enhances the capabilities of Large Language Models (LLMs) by retrieving relevant facts from an external knowledge base before generating a response.
 
 By providing models with verifiable reference material, RAG reduces hallucinations, ensures up-to-date domain knowledge, and improves citation transparency for enterprise healthcare and analytics systems.`;
@@ -253,9 +388,8 @@ Dengan menyediakan materi referensi yang dapat diverifikasi, RAG mengurangi halu
 
 export default function TokenCounter() {
   const { language, t } = useLanguage();
-  const navigate = useNavigate();
   const [text, setText] = useState('');
-  const [selectedModelId, setSelectedModelId] = useState('gpt-4o');
+  const [selectedModelId, setSelectedModelId] = useState('gpt-5-6-sol');
   const [copied, setCopied] = useState(false);
   const textareaRef = useRef(null);
 
@@ -276,7 +410,7 @@ export default function TokenCounter() {
   // Group models for select dropdown
   const modelGroups = useMemo(() => {
     const groups = {};
-    LLM_MODELS.forEach((m) => {
+    LLM_MODELS.filter((m) => CURRENT_MODEL_IDS.has(m.id)).forEach((m) => {
       if (!groups[m.group]) groups[m.group] = [];
       groups[m.group].push(m);
     });
@@ -289,24 +423,18 @@ export default function TokenCounter() {
     const metaDesc = document.querySelector('meta[name="description"]');
     const originalDesc = metaDesc ? metaDesc.getAttribute('content') : '';
 
-    document.title = language === 'id' 
-      ? 'AI Token Counter — Penghitung Token GPT-4o, Claude 3.7, Gemini 2.0, DeepSeek | Akhmad Nizar Z.'
-      : 'AI Token Counter — Free Online Token Calculator for GPT-4o, Claude 3.7, Gemini 2.0 | Akhmad Nizar Z.';
-
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        'content',
-        language === 'id'
-          ? 'Hitung token prompt untuk OpenAI GPT-4o, o3-mini, o1, Claude 3.7 Sonnet, DeepSeek-R1, dan Gemini 2.0 secara instan dan privat di browser.'
-          : 'Free, instant token counter for OpenAI GPT-4o, o3-mini, o1, Claude 3.7 Sonnet, DeepSeek-R1, and Gemini 2.0. 100% computed client-side.'
-      );
-    }
+    setPageSeo({
+      title: language === 'id'
+        ? 'AI Token Counter — Estimasi Token GPT-5.6, Claude 5, Gemini 3, DeepSeek V4 | Akhmad Nizar Z.'
+        : 'AI Token Counter — Private Token Estimates for GPT-5.6, Claude 5, Gemini 3, DeepSeek V4 | Akhmad Nizar Z.',
+      description: language === 'id'
+        ? 'Estimasi token prompt untuk OpenAI GPT-5.6, Claude 5, Gemini 3, dan DeepSeek V4 secara privat di browser.'
+        : 'Private browser-side token estimates for OpenAI GPT-5.6, Claude 5, Gemini 3, and DeepSeek V4.',
+      path: '/token-counter',
+    });
 
     return () => {
-      document.title = originalTitle;
-      if (metaDesc && originalDesc) {
-        metaDesc.setAttribute('content', originalDesc);
-      }
+      setPageSeo({ ...HOME_SEO, title: originalTitle, description: originalDesc });
     };
   }, [language]);
 
@@ -470,6 +598,11 @@ export default function TokenCounter() {
                 <FiActivity /> <span>{t('tcReasoningBadge')}</span>
               </div>
             )}
+            {selectedModel.isEstimate && (
+              <div className="tc-specs-badge-estimate">
+                <FiInfo /> <span>{t('tcEstimateBadge')}</span>
+              </div>
+            )}
           </motion.div>
 
           {/* Context Window Indicator Bar */}
@@ -565,7 +698,9 @@ export default function TokenCounter() {
 
             {/* Textarea */}
             <div className="tc-textarea-wrapper">
-              <textarea
+                <label className="sr-only" htmlFor="token-input">{t('tcInputLabel')}</label>
+                <textarea
+                  id="token-input"
                 ref={textareaRef}
                 className="tc-textarea"
                 value={text}

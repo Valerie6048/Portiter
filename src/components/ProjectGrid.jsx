@@ -76,6 +76,7 @@ export default function ProjectGrid() {
 
   return (
     <section id="projects">
+      <h2 className="sr-only">Selected Projects</h2>
       <FilterBar activeFilter={filter} onFilterChange={setFilter} />
       <div className="project-grid">
         {filtered.map((p) => (

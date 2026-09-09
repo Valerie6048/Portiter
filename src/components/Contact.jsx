@@ -71,10 +71,14 @@ export default function Contact() {
                 </a>
                 <button 
                   className="contact-card" 
-                  onClick={() => {
-                    navigator.clipboard.writeText('akhmad.nizar021@gmail.com');
-                    setCopied(true);
-                    setTimeout(() => setCopied(false), 2000);
+                  onClick={async () => {
+                    try {
+                      await navigator.clipboard.writeText('akhmad.nizar021@gmail.com');
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 2000);
+                    } catch (err) {
+                      console.warn('Copy email failed:', err);
+                    }
                   }}
                   style={{ flex: 'none', padding: '0 24px', cursor: 'pointer' }}
                   title="Copy Email"

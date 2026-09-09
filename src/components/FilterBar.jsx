@@ -12,7 +12,7 @@ export default function FilterBar({ activeFilter, onFilterChange }) {
   ];
 
   return (
-    <div className="filter-bar" id="projects">
+    <div className="filter-bar">
       <div className="filter-pills">
         {filters.map((f) => (
           <button
@@ -26,7 +26,7 @@ export default function FilterBar({ activeFilter, onFilterChange }) {
       </div>
 
       <div className="filter-actions">
-        <a href="/cv.pdf" download className="btn-ghost" style={{ fontSize: '0.82rem', padding: '8px 20px' }}>
+        <a href="/AkhmadNizarZakaria_AIMLEngineer.pdf" download className="btn-ghost" style={{ fontSize: '0.82rem', padding: '8px 20px' }}>
           {t('filterDownloadCV')}
           <FiArrowUpRight size={14} />
         </a>

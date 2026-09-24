@@ -17,7 +17,7 @@ export default function Header() {
     { key: 'navExperience', href: '#experience', type: 'anchor' },
     { key: 'navProjects', href: '#projects', type: 'anchor' },
     { key: 'navSkills', href: '#skills', type: 'anchor' },
-    { key: 'navTokenCounter', path: '/token-counter', type: 'route', badge: 'AI Tool' },
+    { key: 'navTools', href: 'https://tools.akhmdnzr.fun/', type: 'external', badge: 'Tools' },
     { key: 'navContact', href: '#contact', type: 'anchor' },
   ];
 
@@ -53,6 +53,14 @@ export default function Header() {
 
           <nav className="header-nav">
             {navItems.map((item) => {
+              if (item.type === 'external') {
+                return (
+                  <a key={item.key} href={item.href} className="nav-link-route">
+                    <span className="nav-route-text">{t(item.key)}</span>
+                    {item.badge && <span className="nav-badge-pill">{item.badge}</span>}
+                  </a>
+                );
+              }
               if (item.type === 'route') {
                 return (
                   <Link
@@ -118,6 +126,14 @@ export default function Header() {
 
       <div id="mobile-navigation" className={`mobile-menu ${mobileOpen ? 'open' : ''}`}>
         {navItems.map((item) => {
+          if (item.type === 'external') {
+            return (
+              <a key={item.key} href={item.href} className="mobile-nav-link" onClick={() => setMobileOpen(false)}>
+                <span>{t(item.key)}</span>
+                {item.badge && <span className="nav-badge-pill">{item.badge}</span>}
+              </a>
+            );
+          }
           if (item.type === 'route') {
             return (
               <Link

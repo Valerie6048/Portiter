@@ -1,7 +1,9 @@
 {
+  "redirects": [
+    { "source": "/token-counter", "destination": "https://tools.akhmdnzr.fun/token-counter", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
-    { "source": "/token-counter", "destination": "/index.html" },
     { "source": "/project/genai", "destination": "/index.html" },
     { "source": "/project/predictive", "destination": "/index.html" },
     { "source": "/project/mlops", "destination": "/index.html" },

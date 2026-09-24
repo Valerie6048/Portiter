@@ -2,6 +2,8 @@
 
 **Portiter** adalah website portfolio modern interaktif yang dibangun menggunakan React, Vite, Framer Motion, dan React Router, lengkap dengan dukungan dwibahasa (English & Indonesian).
 
+Alat seperti Token Counter dikelola pada proyek terpisah, **Portools**, yang ditujukan untuk `https://tools.akhmdnzr.fun`. URL lama `/token-counter` dikonfigurasi untuk redirect setelah Portools dideploy.
+
 ---
 
 ## 🛠️ Persyaratan System (Prerequisites)

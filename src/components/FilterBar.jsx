@@ -26,7 +26,7 @@ export default function FilterBar({ activeFilter, onFilterChange }) {
       </div>
 
       <div className="filter-actions">
-        <a href="/AkhmadNizarZakaria_AIMLEngineer.pdf" download className="btn-ghost" style={{ fontSize: '0.82rem', padding: '8px 20px' }}>
+        <a href="/AkhmadNizarZakaria_AIMLEngineer.pdf" download className="btn-ghost" data-analytics-event="cv_download" data-analytics-location="project_filter" style={{ fontSize: '0.82rem', padding: '8px 20px' }}>
           {t('filterDownloadCV')}
           <FiArrowUpRight size={14} />
         </a>
@@ -35,6 +35,9 @@ export default function FilterBar({ activeFilter, onFilterChange }) {
           target="_blank"
           rel="noopener noreferrer"
           className="btn-ghost"
+          data-analytics-event="profile_click"
+          data-analytics-platform="github"
+          data-analytics-location="project_filter"
           style={{ fontSize: '0.82rem', padding: '8px 20px' }}
         >
           {t('filterGitHub')}

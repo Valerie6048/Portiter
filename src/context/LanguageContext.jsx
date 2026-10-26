@@ -127,6 +127,7 @@ const translations = {
     footerMade: 'Built with',
     footerBy: 'by Akhmad Nizar Zakaria',
     footerRights: 'All rights reserved.',
+    privacySettings: 'Privacy settings',
 
     // Additional Projects
     projectCafeTitle: 'Cafe Recommendation',
@@ -273,6 +274,7 @@ const translations = {
     footerMade: 'Dibuat dengan',
     footerBy: 'oleh Akhmad Nizar Zakaria',
     footerRights: 'Hak cipta dilindungi.',
+    privacySettings: 'Pengaturan privasi',
 
     // Additional Projects
     projectCafeTitle: 'Rekomendasi Kafe',

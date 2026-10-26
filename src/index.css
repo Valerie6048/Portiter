@@ -1501,6 +1501,116 @@ img { max-width: 100%; display: block; }
 
 .footer .heart { color: var(--accent-green); }
 
+.footer-privacy {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer-privacy:hover,
+.footer-privacy:focus-visible {
+  color: var(--accent-blue);
+}
+
+.analytics-consent {
+  position: fixed;
+  z-index: 1000;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.32);
+  max-height: calc(100vh - 24px);
+  overflow-y: auto;
+}
+
+.analytics-settings-trigger {
+  position: fixed;
+  z-index: 200;
+  left: 12px;
+  bottom: 12px;
+  padding: 7px 10px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.analytics-consent h2 {
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.analytics-consent p {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.analytics-consent-provider { margin-top: 6px; }
+.analytics-consent-provider a {
+  color: var(--accent-blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.analytics-consent-actions {
+  display: flex;
+  flex: none;
+  gap: 8px;
+}
+
+.analytics-consent-actions button {
+  padding: 10px 14px;
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.analytics-consent-accept {
+  background: var(--accent-blue);
+  color: var(--btn-primary-text);
+}
+
+.analytics-consent-reject:hover,
+.analytics-consent-reject:focus-visible {
+  background: var(--bg-hover);
+}
+
+.analytics-consent-accept:hover,
+.analytics-consent-accept:focus-visible {
+  filter: brightness(1.1);
+}
+
+@media (max-width: 640px) {
+  .analytics-consent {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .analytics-consent-actions button { flex: 1; }
+}
+
 /* ===== PROJECT DETAIL PAGE ===== */
 .detail-page {
   min-height: 100vh;

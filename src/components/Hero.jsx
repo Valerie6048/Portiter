@@ -82,7 +82,7 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.45, ease: 'easeOut' }}
       >
-        <a href="/AkhmadNizarZakaria_AIMLEngineer.pdf" download className="btn-primary">
+        <a href="/AkhmadNizarZakaria_AIMLEngineer.pdf" download className="btn-primary" data-analytics-event="cv_download" data-analytics-location="hero">
           <HiOutlineDownload size={18} />
           {t('heroDownloadCV')}
           <FiArrowUpRight size={16} />

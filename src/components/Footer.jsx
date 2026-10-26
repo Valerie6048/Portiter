@@ -17,6 +17,9 @@ export default function Footer() {
       <p>
         {t('footerMade')} <span className="heart">♥</span> {t('footerBy')} &middot; &copy; {year} {t('footerRights')}
       </p>
+      <button type="button" className="footer-privacy" onClick={() => window.dispatchEvent(new Event('portiter:privacy-settings'))}>
+        {t('privacySettings')}
+      </button>
     </footer>
   );
 }

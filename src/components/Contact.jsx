@@ -65,7 +65,7 @@ export default function Contact() {
           if (isEmail) {
             return (
               <div className="contact-email-wrapper" key={i} style={{ display: 'flex', gap: '12px', width: '100%' }}>
-                <a href={c.href} className="contact-card" style={{ flex: 1 }}>
+                <a href={c.href} className="contact-card" data-analytics-event="contact_click" data-analytics-location="contact" style={{ flex: 1 }}>
                   <div className="contact-icon">{c.icon}</div>
                   <span>{c.label}</span>
                 </a>
@@ -98,7 +98,12 @@ export default function Contact() {
               }
             : {};
           return (
-            <Tag className="contact-card" key={i} {...linkProps}>
+            <Tag className="contact-card" key={i} {...linkProps}
+              {...(c.label === 'LinkedIn' || c.label === 'GitHub' ? {
+                'data-analytics-event': 'profile_click',
+                'data-analytics-platform': c.label.toLowerCase(),
+                'data-analytics-location': 'contact',
+              } : {})}>
               <div className="contact-icon">{c.icon}</div>
               <span>{c.label}</span>
             </Tag>

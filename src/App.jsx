@@ -3,7 +3,7 @@ import Home from './pages/Home';
 import ProjectDetail from './pages/ProjectDetail';
 import ScrollToTop from './components/ScrollToTop';
 import NotFound from './pages/NotFound';
-import AnalyticsConsent from './components/AnalyticsConsent';
+import Footer from './components/Footer';
 
 export default function App() {
   return (
@@ -14,7 +14,7 @@ export default function App() {
         <Route path="/project/:projectId" element={<ProjectDetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <AnalyticsConsent />
+      <Footer />
     </BrowserRouter>
   );
 }

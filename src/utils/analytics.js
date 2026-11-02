@@ -1,47 +1,57 @@
 const MEASUREMENT_ID = 'G-G1R86XF4HS';
-const CONSENT_KEY = 'portiter-analytics-consent';
+const OPT_OUT_KEY = 'portiter-analytics-disabled';
 const PRODUCTION_HOSTS = new Set(['akhmdnzr.fun', 'www.akhmdnzr.fun']);
 
 let started = false;
-let sessionChoice = null;
+let disabledInSession = false;
 
-export function getAnalyticsConsent() {
+export function isAnalyticsDisabled() {
   try {
-    const value = window.localStorage.getItem(CONSENT_KEY);
-    return value === 'granted' || value === 'denied' ? value : sessionChoice;
+    const value = window.localStorage.getItem(OPT_OUT_KEY);
+    return value === 'true' || (value === null && disabledInSession);
   } catch {
-    return sessionChoice;
+    return disabledInSession;
   }
 }
 
 function onTrackedClick(event) {
-  const link = event.target.closest('[data-analytics-event]');
-  if (!link || !window.gtag) return;
+  const link = event.target instanceof Element && event.target.closest('[data-analytics-event]');
+  if (!link || !window.gtag || isAnalyticsDisabled()) return;
 
   const name = link.dataset.analyticsEvent;
-  const location = link.dataset.analyticsLocation;
   if (!['contact_click', 'cv_download', 'profile_click'].includes(name)) return;
 
-  const parameters = { cta_location: location };
+  const parameters = { cta_location: link.dataset.analyticsLocation };
   if (name === 'contact_click') parameters.contact_method = 'email';
   if (name === 'profile_click') parameters.profile_platform = link.dataset.analyticsPlatform;
   window.gtag('event', name, parameters);
 }
 
 export function startAnalytics() {
-  if (started || getAnalyticsConsent() !== 'granted' || !PRODUCTION_HOSTS.has(window.location.hostname)) return;
-  started = true;
+  if (started || !PRODUCTION_HOSTS.has(window.location.hostname)) return;
 
+  try { window.localStorage.removeItem('portiter-analytics-consent'); } catch { /* ignored */ }
+
+  if (isAnalyticsDisabled()) {
+    window[`ga-disable-${MEASUREMENT_ID}`] = true;
+    return;
+  }
+
+  started = true;
+  window[`ga-disable-${MEASUREMENT_ID}`] = false;
   window.dataLayer = window.dataLayer || [];
   window.gtag = function gtag() { window.dataLayer.push(arguments); };
   window.gtag('consent', 'default', {
-    analytics_storage: 'granted',
+    analytics_storage: 'denied',
     ad_storage: 'denied',
     ad_user_data: 'denied',
     ad_personalization: 'denied',
   });
   window.gtag('js', new Date());
-  window.gtag('config', MEASUREMENT_ID);
+  window.gtag('config', MEASUREMENT_ID, {
+    allow_google_signals: false,
+    allow_ad_personalization_signals: false,
+  });
 
   const script = document.createElement('script');
   script.async = true;
@@ -50,31 +60,20 @@ export function startAnalytics() {
   document.addEventListener('click', onTrackedClick);
 }
 
-function clearAnalyticsCookies() {
-  const hostname = window.location.hostname;
-  const domains = ['', hostname, `.${hostname}`, '.akhmdnzr.fun'];
-  for (const cookie of document.cookie.split(';')) {
-    const name = cookie.trim().split('=')[0];
-    if (!/^_ga(?:_|$)/.test(name)) continue;
-    for (const domain of domains) {
-      document.cookie = `${name}=; Max-Age=0; Path=/; SameSite=Lax${domain ? `; Domain=${domain}` : ''}`;
-    }
-  }
-}
+export function setAnalyticsDisabled(disabled) {
+  disabledInSession = disabled;
+  try { window.localStorage.setItem(OPT_OUT_KEY, String(disabled)); } catch { /* session-only choice */ }
+  window[`ga-disable-${MEASUREMENT_ID}`] = disabled;
 
-export function setAnalyticsConsent(choice) {
-  sessionChoice = choice;
-  try {
-    window.localStorage.setItem(CONSENT_KEY, choice);
-  } catch {
-    // Consent still applies for this page when storage is unavailable.
-  }
-
-  if (choice === 'granted') {
-    startAnalytics();
-  } else if (started) {
+  if (disabled) {
     document.removeEventListener('click', onTrackedClick);
-    clearAnalyticsCookies();
-    window.location.reload(); // Unload the tag entirely after withdrawal.
+  } else if (started) {
+    document.addEventListener('click', onTrackedClick);
+    window.gtag('config', MEASUREMENT_ID, {
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false,
+    });
+  } else {
+    startAnalytics();
   }
 }

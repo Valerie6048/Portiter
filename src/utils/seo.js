@@ -1,4 +1,4 @@
-const SITE_ORIGIN = 'https://akhmdnzr.fun';
+const SITE_ORIGIN = 'https://www.akhmdnzr.fun';
 
 function setMeta(name, content, attribute = 'name') {
   const element = document.querySelector(`meta[${attribute}="${name}"]`);

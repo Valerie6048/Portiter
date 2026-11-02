@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://akhmdnzr.fun/sitemap.xml
+Sitemap: https://www.akhmdnzr.fun/sitemap.xml
 

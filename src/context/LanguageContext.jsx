@@ -127,7 +127,10 @@ const translations = {
     footerMade: 'Built with',
     footerBy: 'by Akhmad Nizar Zakaria',
     footerRights: 'All rights reserved.',
-    privacySettings: 'Privacy settings',
+    disableAnalytics: 'Disable analytics',
+    enableAnalytics: 'Enable analytics',
+    analyticsNotice: 'This site uses Google Analytics without analytics cookies for visit statistics.',
+    googlePrivacyPolicy: 'Google Privacy Policy',
 
     // Additional Projects
     projectCafeTitle: 'Cafe Recommendation',
@@ -274,7 +277,10 @@ const translations = {
     footerMade: 'Dibuat dengan',
     footerBy: 'oleh Akhmad Nizar Zakaria',
     footerRights: 'Hak cipta dilindungi.',
-    privacySettings: 'Pengaturan privasi',
+    disableAnalytics: 'Nonaktifkan analitik',
+    enableAnalytics: 'Aktifkan analitik',
+    analyticsNotice: 'Situs ini memakai Google Analytics tanpa cookie analitik untuk statistik kunjungan.',
+    googlePrivacyPolicy: 'Kebijakan Privasi Google',
 
     // Additional Projects
     projectCafeTitle: 'Rekomendasi Kafe',

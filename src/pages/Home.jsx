@@ -6,7 +6,6 @@ import BundleSection from '../components/BundleSection';
 import SkillsSection from '../components/SkillsSection';
 import Education from '../components/Education';
 import Contact from '../components/Contact';
-import Footer from '../components/Footer';
 
 export default function Home() {
   return (
@@ -21,7 +20,6 @@ export default function Home() {
         <Education />
         <Contact />
       </main>
-      <Footer />
     </>
   );
 }

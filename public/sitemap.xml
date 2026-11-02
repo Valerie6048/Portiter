@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://akhmdnzr.fun/</loc>
-    <priority>1.0</priority>
+    <loc>https://www.akhmdnzr.fun/</loc>
   </url>
   <url>
-    <loc>https://akhmdnzr.fun/project/genai</loc>
-    <priority>0.8</priority>
+    <loc>https://www.akhmdnzr.fun/project/genai</loc>
   </url>
   <url>
-    <loc>https://akhmdnzr.fun/project/predictive</loc>
-    <priority>0.8</priority>
+    <loc>https://www.akhmdnzr.fun/project/predictive</loc>
   </url>
   <url>
-    <loc>https://akhmdnzr.fun/project/mlops</loc>
-    <priority>0.8</priority>
+    <loc>https://www.akhmdnzr.fun/project/mlops</loc>
   </url>
   <url>
-    <loc>https://akhmdnzr.fun/project/cafe</loc>
-    <priority>0.7</priority>
+    <loc>https://www.akhmdnzr.fun/project/cafe</loc>
   </url>
   <url>
-    <loc>https://akhmdnzr.fun/project/crypto</loc>
-    <priority>0.7</priority>
+    <loc>https://www.akhmdnzr.fun/project/crypto</loc>
   </url>
 </urlset>

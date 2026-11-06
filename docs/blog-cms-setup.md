@@ -71,24 +71,18 @@ Perubahan pada artikel publik menambahkan row ke `portiter_blog_deploy_jobs`. Da
 
 Generator tersedia di **Admin → Artikel → Generate artikel**. Masukkan topik dan pilih satu bahasa. Generator memakai Tavily Search dan Extract untuk memperoleh setidaknya tiga sumber yang dapat dibaca, lalu Gemini menyiapkan artikel, ringkasan, SEO, serta saran kategori/tag yang sudah ada. Hasil disimpan sebagai draft; admin memeriksa isi dan tautan sumber di editor sebelum menekan **Terbitkan sekarang**. Cover dapat dipilih dari media library. Bahasa lain tetap draft kosong.
 
-Generator memanggil `gemini-3.8-flash` melalui **Vertex AI express mode pada Google Cloud**, memakai API key `AQ.` yang terikat ke Agent Platform API. Ini berbeda dari `GEMINI_API_KEY` (`AIza`) untuk endpoint Gemini Developer API. Simpan key GCP hanya sebagai secret Supabase Edge Function; jangan menaruhnya di variabel `VITE_*` atau repository.
+Generator berjalan sebagai Vercel Function `/api/blog-generate` dan memanggil `gemini-3.8-flash` melalui **Vertex AI express mode pada Google Cloud**, memakai API key `AQ.` yang terikat ke Agent Platform API. Ini berbeda dari `GEMINI_API_KEY` (`AIza`) untuk endpoint Gemini Developer API. Simpan key GCP hanya sebagai environment variable server Vercel; jangan menaruhnya di variabel `VITE_*` atau repository.
 
-Set secret berikut secara terpisah di proyek Supabase development dan production sebelum deploy:
+Set environment variable berikut secara terpisah untuk Vercel Preview dan Production, lalu lakukan redeploy setelah nilainya diubah:
 
 | Secret | Isi |
 | --- | --- |
 | `TAVILY_API_KEY` | API key Tavily |
 | `GCP_API_KEY` | API key Vertex AI express mode (`AQ.`) yang diizinkan memakai Agent Platform API |
 | `GEMINI_MODEL` | Opsional; default `gemini-3.8-flash` |
-| `BLOG_GENERATOR_ALLOWED_ORIGINS` | Origin website production, Preview, dan lokal, dipisah koma |
+| `SUPABASE_URL` dan `SUPABASE_ANON_KEY` | Proyek Supabase yang dipakai CMS pada environment tersebut |
 
-`GEMINI_API_KEY` tidak dipakai untuk alur ini. Key express mode dikirim lewat header `x-goog-api-key` ke endpoint `aiplatform.googleapis.com`. Setelah secret siap, deploy function:
-
-```powershell
-supabase functions deploy blog-generate --project-ref <project-ref>
-```
-
-Isi `BLOG_GENERATOR_ALLOWED_ORIGINS` dengan origin persis untuk website production, Preview, dan lokal yang dipakai; nilai default function hanya mencakup `https://www.akhmdnzr.fun` serta localhost port 5173. Function memerlukan JWT user dan memeriksa allowlist `portiter_blog_admins` sebelum memanggil provider. Simpan key di Supabase Edge Function secrets; kredensial yang hanya tersimpan di Vercel tidak tersedia bagi function ini.
+`GEMINI_API_KEY` tidak dipakai untuk alur ini. Key express mode dikirim lewat header `x-goog-api-key` ke endpoint `aiplatform.googleapis.com`. Vercel Function memerlukan JWT user dan memeriksa allowlist `portiter_blog_admins` sebelum memanggil provider. Frontend memakai endpoint pada origin yang sama, sehingga tidak memerlukan konfigurasi CORS atau deployment Edge Function Supabase.
 
 Untuk uji Preview, buat artikel pada proyek Supabase development, periksa kedua pilihan bahasa, sumber, metadata dan cover, lalu terbitkan dan tunggu build Vercel berhasil. Jika penyimpanan draft gagal, hasil generator tetap berada di halaman selama tab belum ditutup sehingga bisa dicoba simpan lagi. Error riset atau Gemini tidak membuat artikel baru.
 

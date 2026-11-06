@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { authorizeAdmin, buildArticle, collectSources, providerJson, validateRequest } from '../supabase/functions/blog-generate/article.mjs';
+import { authorizeAdmin, buildArticle, collectSources, providerJson, validateRequest } from '../server/blog-generator/article.mjs';
 import { slugCandidate, createGeneratedDraft } from '../src/admin/generated-draft.js';
 import { renderContentHtml } from '../src/blog/content.js';
-import { vertexExpressUrl } from '../supabase/functions/blog-generate/vertex-express.mjs';
+import { vertexExpressUrl } from '../server/blog-generator/vertex-express.mjs';
 
 const results = Array.from({ length: 4 }, (_, index) => ({
   url: `https://source${index + 1}.example/research`, title: `Research ${index + 1}`,

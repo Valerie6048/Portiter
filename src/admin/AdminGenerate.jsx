@@ -37,17 +37,15 @@ export default function AdminGenerate() {
     setError('');
     try {
       const client = requireSupabase();
-      const { data, error: invokeError } = await client.functions.invoke('blog-generate', {
-        body: { topic: topic.trim(), locale },
+      const { data: sessionData, error: sessionError } = await client.auth.getSession();
+      if (sessionError || !sessionData.session?.access_token) throw new Error('Sesi admin berakhir. Silakan login lagi.');
+      const response = await fetch('/api/blog-generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${sessionData.session.access_token}` },
+        body: JSON.stringify({ topic: topic.trim(), locale }),
       });
-      if (invokeError) {
-        let message = invokeError.message;
-        try {
-          const details = await invokeError.context?.json();
-          message = details?.error || message;
-        } catch { /* Network failures have no JSON response. */ }
-        throw new Error(message);
-      }
+      const data = await response.json().catch(() => null);
+      if (!response.ok) throw new Error(data?.error || `Generator gagal (HTTP ${response.status}).`);
       if (!data?.article?.content_json || data.article.locale !== locale) throw new Error('Respons generator tidak lengkap.');
       setArticle(data.article);
       await saveDraft(data.article);

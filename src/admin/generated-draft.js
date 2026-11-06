@@ -49,7 +49,11 @@ export async function createGeneratedDraft(client, userId, article) {
           meta_title: article.meta_title, meta_description: article.meta_description,
           status: 'draft', cover_media_id: null,
         },
-        { post_id: post.id, locale: otherLocale, slug: otherSlug, content_json: EMPTY_CONTENT, status: 'draft' },
+        {
+          post_id: post.id, locale: otherLocale, slug: otherSlug,
+          title: '', excerpt: '', content_json: EMPTY_CONTENT,
+          meta_title: '', meta_description: '', status: 'draft', cover_media_id: null,
+        },
       ];
       const { error: translationError } = await client.from('portiter_blog_translations').insert(translations);
       if (translationError) throw translationError;

@@ -100,6 +100,14 @@ test('saves generated locale as draft and leaves partner locale blank', async ()
   assert.equal(inserted.translations[0].status, 'draft');
   assert.equal(inserted.translations[0].slug, `${baseSlug}-2`);
   assert.equal(inserted.translations[1].locale, 'en');
-  assert.equal(inserted.translations[1].title, undefined);
+  assert.equal(inserted.translations[1].title, '');
+  assert.equal(inserted.translations[1].excerpt, '');
+  assert.equal(inserted.translations[1].meta_title, '');
+  assert.equal(inserted.translations[1].meta_description, '');
+  for (const row of inserted.translations) {
+    for (const field of ['title', 'excerpt', 'meta_title', 'meta_description']) {
+      assert.equal(typeof row[field], 'string', `${field} must never be null in a bulk insert`);
+    }
+  }
   assert.deepEqual(inserted.portiter_blog_post_categories, [{ post_id: 'post-1', category_id: 'cat-1' }]);
 });

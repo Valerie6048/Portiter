@@ -242,7 +242,11 @@ async function main() {
     const section = `<section class="seo-home-blog"><h2>Latest writing</h2><div>${homeStories.map(({ post, translation }) => `<article><a href="${translationPath(translation)}"><strong>${escapeHtml(translation.title)}</strong></a><p>${escapeHtml(translation.excerpt)}</p></article>`).join('')}</div><a href="/blog">Explore all writing ↗</a></section>`;
     const homePath = path.join(dist, 'index.html');
     let html = await readFile(homePath, 'utf8');
-    if (homeStories.length) html = replaceRoot(html, section);
+    if (homeStories.length) {
+      const fallback = /(<main class="seo-fallback">[\s\S]*?)(<\/main>)/;
+      if (!fallback.test(html)) throw new Error('Missing home SEO fallback in built index.html');
+      html = html.replace(fallback, (_, opening, closing) => `${opening}${section}${closing}`);
+    }
     await writeFile(homePath, embedBlogData(html, blog.posts));
   }
 

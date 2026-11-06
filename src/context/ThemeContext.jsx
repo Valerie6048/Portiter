@@ -3,19 +3,20 @@ import { createContext, useContext, useState, useEffect } from 'react';
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  // Try to get saved theme from localStorage, default to 'dark'
   const [theme, setTheme] = useState(() => {
-    const saved = localStorage.getItem('theme');
-    if (saved) return saved;
-    // Fallback to system preference if no saved preference
+    const initialTheme = document.documentElement.dataset.theme;
+    if (initialTheme === 'light' || initialTheme === 'dark') return initialTheme;
+    try {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light' || saved === 'dark') return saved;
+    } catch { /* storage may be unavailable */ }
     const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
     return prefersLight ? 'light' : 'dark';
   });
 
   useEffect(() => {
-    // Set data-theme attribute on document element
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
+    try { localStorage.setItem('theme', theme); } catch { /* session-only theme */ }
   }, [theme]);
 
   const toggleTheme = () => {

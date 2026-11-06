@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { HiOutlineDownload, HiOutlineMail } from 'react-icons/hi';
 import { FiArrowUpRight } from 'react-icons/fi';
@@ -10,58 +9,34 @@ export default function Hero() {
 
   return (
     <section className="hero">
-      <motion.div
-        className="hero-avatar-wrapper"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-      >
+      <div className="hero-avatar-wrapper">
         <div className="hero-avatar">
           <img src={avatarProfile} alt="Akhmad Nizar Zakaria" />
           <div className="avatar-glow"></div>
         </div>
-      </motion.div>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-      >
+      <div>
         <span className="status-pill">
           <span className="status-dot" />
           {t('heroStatusAvailable')}
         </span>
         <h1 className="hero-name">
-          <span className="gradient-text">Akhmad Nizar</span>
+          Akhmad Nizar
           <br />
           Zakaria
         </h1>
-      </motion.div>
+      </div>
 
-      <motion.p
-        className="hero-role"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.15, ease: 'easeOut' }}
-      >
+      <p className="hero-role">
         {t('heroRole')}
-      </motion.p>
+      </p>
 
-      <motion.p
-        className="hero-desc"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.3, ease: 'easeOut' }}
-      >
+      <p className="hero-desc">
         {t('heroValueProp')}
-      </motion.p>
+      </p>
 
-      <motion.div
-        className="hero-stats"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.38, ease: 'easeOut' }}
-      >
+      <div className="hero-stats">
         <div className="stat-item">
           <span className="stat-num">5+</span>
           <span className="stat-label">{t('heroStatsProjects')}</span>
@@ -74,14 +49,9 @@ export default function Hero() {
           <span className="stat-num">3.73</span>
           <span className="stat-label">{t('heroStatsGPA')}</span>
         </div>
-      </motion.div>
+      </div>
 
-      <motion.div
-        className="hero-buttons"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.45, ease: 'easeOut' }}
-      >
+      <div className="hero-buttons">
         <a href="/AkhmadNizarZakaria_AIMLEngineer.pdf" download className="btn-primary" data-analytics-event="cv_download" data-analytics-location="hero">
           <HiOutlineDownload size={18} />
           {t('heroDownloadCV')}
@@ -95,7 +65,7 @@ export default function Hero() {
           {t('heroContactMe')}
           <FiArrowUpRight size={16} />
         </a>
-      </motion.div>
+      </div>
     </section>
   );
 }

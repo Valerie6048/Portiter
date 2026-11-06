@@ -33,7 +33,7 @@ Jalankan kedua migrasi dan isi allowlist admin sebelum menjalankan `npm.cmd run 
 
 Tambahkan `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `SUPABASE_URL`, dan `SUPABASE_ANON_KEY` ke environment Production dan Preview Vercel. Build production sengaja gagal jika Supabase belum dikonfigurasi atau query konten gagal; ini mencegah deployment menghasilkan sitemap kosong.
 
-Buat Vercel Deploy Hook untuk branch production. Simpan URL tersebut hanya sebagai Edge Function secret. Build membaca terjemahan publik melalui query read-only; draft tetap tertutup oleh RLS. Rewrites Vercel hanya mengarahkan `/admin` ke SPA; route blog harus ada sebagai file statis agar slug tak dikenal berstatus 404.
+Buat Vercel Deploy Hook untuk branch production dan simpan sebagai `VERCEL_DEPLOY_HOOK_URL` di environment server Vercel Production. Gunakan hook terpisah untuk Preview jika Preview memakai proyek Supabase development. Jangan menaruh URL hook di variabel `VITE_*`. Build membaca terjemahan publik melalui query read-only; draft tetap tertutup oleh RLS. Rewrites Vercel hanya mengarahkan `/admin` ke SPA; route blog harus ada sebagai file statis agar slug tak dikenal berstatus 404.
 
 ## Jadwal artikel dan sinkronisasi build
 
@@ -65,7 +65,7 @@ select vault.create_secret(
 
 Setelah itu jalankan `supabase/cron.sql` lewat SQL Editor. Script membuang jadwal bernama sama sebelum membuat ulang, agar setup bisa diulang tanpa menambah Cron duplikat. Cron memeriksa jadwal dan antrean build setiap menit.
 
-Perubahan pada artikel publik menambahkan row ke `portiter_blog_deploy_jobs`. Dashboard membedakan `queued`, `triggered`, dan `failed`; job yang gagal memicu Deploy Hook bisa dicoba ulang. Status hasil build dan error kompilasi lengkap dilihat di Vercel.
+Perubahan pada artikel publik menambahkan row ke `portiter_blog_deploy_jobs`. Saat admin menekan **Terbitkan sekarang** atau **Simpan dan perbarui**, Vercel Function yang memeriksa JWT admin memicu Deploy Hook dan memperbarui status job. Tombol **Sinkronkan website** di dashboard dapat memproses job yang masih `queued`; job gagal dapat dicoba ulang. Ini tidak memerlukan service-role key di Vercel. Cron Supabase di atas tetap diperlukan untuk menerbitkan artikel terjadwal tanpa admin yang sedang aktif. Status hasil build dan error kompilasi lengkap dilihat di Vercel.
 
 ## Generator artikel dengan Tavily dan Gemini di Vertex AI express mode
 

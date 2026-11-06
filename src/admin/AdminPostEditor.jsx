@@ -6,6 +6,7 @@ import { fetchAdminPost, fetchAdminTaxonomy } from '../blog/data';
 import { makeSlug, plainTextFromContent, readTimeMinutes } from '../blog/content';
 import { requireSupabase } from '../blog/supabase';
 import { useAdminAuth } from './AuthContext';
+import { requestBlogDeploy } from './blog-deploy';
 
 const EMPTY_CONTENT = { type: 'doc', content: [{ type: 'paragraph' }] };
 const LOCALES = ['en', 'id'];
@@ -173,9 +174,18 @@ export default function AdminPostEditor() {
         translations: post.translations.map((item) => item.id === updatedTranslation.id ? updatedTranslation : item),
       });
       setSavedAt(new Date());
-      if (mode === 'publish') setError('Artikel diterbitkan. Perubahan akan muncul setelah website selesai dibangun ulang.');
+      if (mode === 'publish' || (mode === 'draft' && form.status === 'published')) {
+        try {
+          const deployment = await requestBlogDeploy();
+          setError(deployment.deployment === 'triggered'
+            ? (mode === 'publish' ? 'Artikel diterbitkan. Build website sudah dipicu; tautan publik aktif setelah deployment selesai.' : 'Publikasi ditarik. Build website sudah dipicu.')
+            : 'Perubahan tersimpan, tetapi tidak ada job build. Periksa sinkronisasi di dashboard.');
+        } catch (deployError) {
+          setError(`Perubahan tersimpan, tetapi build website belum dipicu: ${deployError.message}. Coba Sinkronkan website di dashboard.`);
+        }
+      }
       if (mode === 'schedule') setError('Jadwal tersimpan. Artikel akan terbit otomatis pada waktu yang dipilih.');
-      if (mode === 'draft') setError('Draft tersimpan.');
+      if (mode === 'draft' && form.status !== 'published') setError('Draft tersimpan.');
       const { data: history } = await client.from('portiter_blog_post_revisions').select('*').eq('translation_id', activeTranslation.id).order('created_at', { ascending: false }).limit(20);
       if (history) setRevisions(history);
       return true;
@@ -314,7 +324,7 @@ export default function AdminPostEditor() {
             <label className="admin-field">Jadwalkan · Asia/Jakarta<input type="datetime-local" value={form.scheduledLocal || ''} onChange={(event) => updateForm('scheduledLocal', event.target.value)}/></label>
             <button type="button" className="admin-outline-button full-width" disabled={saving || !form.scheduledLocal} onClick={() => persist('schedule')}>Jadwalkan artikel</button>
             {form.status !== 'draft' && <button type="button" className="admin-text-button" onClick={() => { if (window.confirm('Tarik artikel dari publik dan ubah statusnya menjadi draft?')) persist('draft'); }}>{form.status === 'scheduled' ? 'Batalkan jadwal' : 'Tarik publikasi dan jadikan draft'}</button>}
-            {showPublicLink && <a className="editor-public-url" href={currentPath} target="_blank" rel="noopener noreferrer">{window.location.origin}{currentPath}</a>}
+            {showPublicLink && <><a className="editor-public-url" href={currentPath} target="_blank" rel="noopener noreferrer">{window.location.origin}{currentPath}</a><small className="editor-public-note">Tautan aktif setelah build Vercel selesai.</small></>}
           </section>
           <section className="editor-sidebar-card"><div className="admin-panel-heading"><h2>Cover image</h2></div>
             {selectedMedia ? <div className="editor-cover-preview"><img src={selectedMedia.public_url} alt={selectedMedia.alt_text || ''}/><button type="button" onClick={() => updateForm('cover_media_id', null)}>Hapus cover</button></div> : <p className="admin-empty-inline">Pilih gambar untuk kartu artikel dan social preview.</p>}

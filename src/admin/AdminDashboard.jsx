@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { fetchAdminPosts } from '../blog/data';
 import { requireSupabase } from '../blog/supabase';
 import { exportBlogBackup, importBlogBackup } from './backup';
+import { requestBlogDeploy } from './blog-deploy';
 
 export default function AdminDashboard() {
   const [posts, setPosts] = useState([]);
   const [jobs, setJobs] = useState([]);
   const [error, setError] = useState('');
+  const [notice, setNotice] = useState('');
   const [busyJob, setBusyJob] = useState('');
   const [backupBusy, setBackupBusy] = useState(false);
   const backupInput = useRef(null);
@@ -35,8 +37,23 @@ export default function AdminDashboard() {
     setBusyJob(id);
     const { error: updateError } = await requireSupabase().from('portiter_blog_deploy_jobs').update({ status: 'queued', error_message: null, processed_at: null, claimed_at: null }).eq('id', id);
     if (updateError) setError(updateError.message);
+    else {
+      try { await requestBlogDeploy(); }
+      catch (deployError) { setError(deployError.message); }
+    }
     setBusyJob('');
     refresh();
+  };
+
+  const syncWebsite = async () => {
+    setBusyJob('sync');
+    setError('');
+    setNotice('');
+    try {
+      const result = await requestBlogDeploy();
+      setNotice(result.deployment === 'triggered' ? 'Build website dipicu. Tunggu deployment Vercel selesai sebelum membuka tautan publik.' : 'Tidak ada perubahan publik yang menunggu build.');
+    } catch (deployError) { setError(deployError.message); }
+    finally { setBusyJob(''); refresh(); }
   };
 
   const exportBackup = async () => {
@@ -73,6 +90,7 @@ export default function AdminDashboard() {
     <>
       <section className="admin-welcome"><div><span className="admin-eyebrow">EDITORIAL WORKSPACE</span><h1>Selamat datang kembali.</h1><p>Semua yang kamu butuhkan untuk menyusun, menerbitkan, dan mengelola tulisan.</p></div><div className="admin-welcome-actions"><button className="admin-outline-button" type="button" disabled={backupBusy} onClick={exportBackup}>Ekspor backup</button><button className="admin-outline-button" type="button" disabled={backupBusy} onClick={() => backupInput.current?.click()}>Pulihkan backup</button><input ref={backupInput} type="file" accept="application/json,.json" hidden onChange={importBackup}/><Link className="admin-primary admin-new-post" to="/admin/posts/new">＋ Buat artikel</Link></div></section>
       {error && <div className="admin-banner-error" role="alert">{error}</div>}
+      {notice && <div className="admin-banner-success" role="status">{notice}</div>}
       <section className="admin-stat-grid" aria-label="Ringkasan artikel">
         {[['Published', counts.published, '↗', 'teal'], ['Draft', counts.draft, '◷', 'gold'], ['Scheduled', counts.scheduled, '◷', 'blue'], ['Archived', counts.archived, '▤', 'violet'], ['Trash', counts.trash, '⌫', 'red']].map(([label, count, icon, color]) => <Link key={label} to={`/admin/posts?status=${String(label).toLowerCase()}`} className="admin-stat-card"><span className={`admin-stat-icon ${color}`}>{icon}</span><span className="admin-stat-label">{label}</span><strong>{count}</strong><span className="admin-stat-foot">{label === 'Trash' ? 'Siap dipulihkan' : 'Versi EN & ID'}</span></Link>)}
       </section>
@@ -81,8 +99,8 @@ export default function AdminDashboard() {
           {posts.slice(0, 5).map((post) => <Link className="admin-recent-post" key={post.id} to={`/admin/posts/${post.id}`}><span className="admin-recent-title">{post.translations.find((item) => item.locale === 'en')?.title || post.translations.find((item) => item.locale === 'id')?.title || 'Untitled article'}<small>{post.translations.map((item) => item.locale.toUpperCase()).join(' · ')}</small></span><span className={`admin-status-dot ${post.trashed_at ? 'red' : post.archived_at ? 'muted' : post.translations.some((item) => item.status === 'published') ? 'green' : 'gold'}`}>{post.trashed_at ? 'Trash' : post.archived_at ? 'Archived' : post.translations.some((item) => item.status === 'published') ? 'Published' : 'Draft'}</span></Link>)}
           {posts.length === 0 && <p className="admin-empty-inline">Belum ada artikel. Buat draft pertamamu.</p>}
         </section>
-        <section className="admin-panel"><div className="admin-panel-heading"><div><span className="admin-eyebrow">SITE SYNC</span><h2>Build website</h2></div><span className="admin-live-badge">● otomatis</span></div>
-          <p className="admin-sync-note">Perubahan pada artikel publik masuk antrean. Vercel membangun ulang halaman dalam beberapa menit.</p>
+        <section className="admin-panel"><div className="admin-panel-heading"><div><span className="admin-eyebrow">SITE SYNC</span><h2>Build website</h2></div><button type="button" className="admin-outline-button" disabled={Boolean(busyJob)} onClick={syncWebsite}>{busyJob === 'sync' ? 'Memicu build…' : 'Sinkronkan website'}</button></div>
+          <p className="admin-sync-note">Artikel yang diterbitkan memicu build Vercel. Tautan publik tersedia setelah build selesai; gunakan tombol sinkronisasi jika job masih queued.</p>
           {jobs.map((job) => <div className="admin-job-row" key={job.id}><span><b>{job.status}</b><small>{new Date(job.created_at).toLocaleString('id-ID')}</small>{job.error_message && <small className="admin-error">{job.error_message}</small>}</span>{job.status === 'failed' && <button type="button" disabled={busyJob === job.id} onClick={() => retryJob(job.id)}>{busyJob === job.id ? '…' : 'Coba lagi'}</button>}</div>)}
           {jobs.length === 0 && <p className="admin-empty-inline">Belum ada perubahan publik.</p>}
           <a className="admin-deploy-help" href="https://vercel.com/dashboard" target="_blank" rel="noopener noreferrer">Status build lengkap tersedia di Vercel ↗</a>

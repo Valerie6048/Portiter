@@ -2054,8 +2054,8 @@ img { max-width: 100%; display: block; }
 .blog-breadcrumbs a, .blog-article-footer a { color: var(--accent-blue); }
 .blog-article-header { margin-bottom: 34px; }
 .blog-article-kicker { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
-.blog-article-header h1 { margin: 0 0 16px; font-size: clamp(2.4rem, 6vw, 4.1rem); line-height: 1.08; letter-spacing: -.06em; }
-.blog-article-excerpt { color: var(--text-secondary); font-size: 1.18rem; line-height: 1.6; }
+.blog-article-header h1 { margin: 0 0 18px; color: var(--text-primary); font-size: clamp(2.15rem, 4.2vw, 3.45rem); line-height: 1.13; letter-spacing: -.045em; overflow-wrap: anywhere; }
+.blog-article-excerpt { max-width: 68ch; color: var(--text-secondary); font-size: 1.12rem; line-height: 1.7; }
 .blog-article-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 22px; color: var(--text-muted); font-size: .8rem; }
 .blog-article-meta button { padding: 5px 9px; color: var(--accent-blue); font: inherit; font-weight: 600; }
 .blog-article-cover { margin: 0 0 38px; }
@@ -2303,9 +2303,12 @@ img { max-width: 100%; display: block; }
 .taxonomy-term b { display: block; color: #d7e0eb; font-size: .74rem; }.taxonomy-term small { display: block; margin-top: 3px; color: #8290a3; font-size: .66rem; }.taxonomy-term button { color: #d98990; font-size: 1.1rem; }
 .taxonomy-create-form { display: grid; gap: 8px; padding-top: 13px; border-top: 1px solid #2a374b; }
 .taxonomy-create-form .admin-primary { justify-self: start; }
-.admin-preview-shell { min-height: 100vh; background: var(--bg-primary); }
-.preview-banner { position: sticky; top: 0; z-index: 20; display: flex; justify-content: space-between; padding: 12px 22px; color: #ead3a4; background: #4a3b22; font-size: .72rem; }
-.preview-banner a { color: #e6e9eb; }
+.admin-preview-shell { min-height: 100vh; background: var(--bg-primary); color: var(--text-primary); }
+.preview-banner { position: sticky; top: 0; z-index: 20; display: flex; justify-content: space-between; gap: 16px; padding: 14px 22px; color: var(--text-secondary); background: var(--bg-card); border-bottom: 1px solid var(--border-color); font-size: .76rem; }
+.preview-banner span { color: var(--accent-green); font-weight: 700; letter-spacing: .04em; }
+.preview-banner a { color: var(--accent-blue); font-weight: 700; }
+.preview-banner a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.editor-public-note { display: block; margin-top: 8px; color: #9ba8bb; font-size: .68rem; line-height: 1.5; }
 
 @media (max-width: 1100px) {
   .admin-stat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }

@@ -18,6 +18,7 @@ export default function Header() {
     { key: 'navProjects', href: '#projects', type: 'anchor' },
     { key: 'navSkills', href: '#skills', type: 'anchor' },
     { key: 'navTools', href: 'https://tools.akhmdnzr.fun/', type: 'external', badge: 'Tools' },
+    { key: 'navBlog', path: '/blog', type: 'route', badge: 'New' },
     { key: 'navContact', href: '#contact', type: 'anchor' },
   ];
 

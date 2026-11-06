@@ -10,7 +10,7 @@ Alat seperti Token Counter dikelola pada proyek terpisah, **Portools**, yang dit
 
 Pastikan Anda telah menginstal:
 
-* [Node.js](https://nodejs.org/) (versi **18.x** atau yang lebih baru direkomendasikan)
+* [Node.js](https://nodejs.org/) (**20.19+** atau **22.12+**, sesuai kebutuhan Vite 8)
 * [npm](https://www.npmjs.com/) (terinstal otomatis bersama Node.js)
 
 ---
@@ -69,3 +69,9 @@ npm run preview
 * `src/pages/` — Halaman utama (Home) dan halaman detail (ProjectDetail).
 * `src/index.css` — Seluruh styling visual terpusat.
 * `public/` — Aset publik seperti file CV (`AkhmadNizarZakaria_AIMLEngineer.pdf`) dan favicon.
+
+## Blog dan CMS
+
+Blog tersedia di `/blog` (English) dan `/id/blog` (Bahasa Indonesia). Dashboard admin ada di `/admin/login`; autentikasi, database, media, dan jadwal publish memakai Supabase. Login admin saat ini memakai email/password dan allowlist UUID tanpa MFA. Lihat [rencana implementasi](docs/blog-cms-implementation-plan.md) dan [panduan setup akun/deployment](docs/blog-cms-setup.md) untuk konfigurasi environment, migrasi, cron, dan Vercel Deploy Hook.
+
+Tanpa konfigurasi Supabase, build lokal tetap berhasil dengan daftar artikel kosong. Build production di Vercel memerlukan URL dan anon key Supabase supaya generator halaman statis, sitemap, dan RSS membaca konten yang benar.

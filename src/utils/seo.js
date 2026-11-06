@@ -5,8 +5,9 @@ function setMeta(name, content, attribute = 'name') {
   if (element) element.setAttribute('content', content);
 }
 
-export function setPageSeo({ title, description, path = '/', image = '/og_image.jpg' }) {
+export function setPageSeo({ title, description, path = '/', image = '/og_image.jpg', type = 'website' }) {
   const url = `${SITE_ORIGIN}${path}`;
+  const imageUrl = /^https?:\/\//i.test(image) ? image : `${SITE_ORIGIN}${image}`;
   document.title = title;
 
   let canonical = document.querySelector('link[rel="canonical"]');
@@ -18,13 +19,14 @@ export function setPageSeo({ title, description, path = '/', image = '/og_image.
   canonical.setAttribute('href', url);
 
   setMeta('description', description);
+  setMeta('og:type', type, 'property');
   setMeta('og:title', title, 'property');
   setMeta('og:description', description, 'property');
   setMeta('og:url', url, 'property');
-  setMeta('og:image', `${SITE_ORIGIN}${image}`, 'property');
+  setMeta('og:image', imageUrl, 'property');
   setMeta('twitter:title', title);
   setMeta('twitter:description', description);
-  setMeta('twitter:image', `${SITE_ORIGIN}${image}`);
+  setMeta('twitter:image', imageUrl);
 }
 
 export const HOME_SEO = {

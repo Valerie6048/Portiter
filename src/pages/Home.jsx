@@ -6,6 +6,7 @@ import BundleSection from '../components/BundleSection';
 import SkillsSection from '../components/SkillsSection';
 import Education from '../components/Education';
 import Contact from '../components/Contact';
+import HomeBlogHighlights from '../blog/HomeBlogHighlights';
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <Experience />
         <ProjectGrid />
         <BundleSection />
+        <HomeBlogHighlights />
         <SkillsSection />
         <Education />
         <Contact />

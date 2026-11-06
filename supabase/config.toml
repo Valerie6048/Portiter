@@ -1,0 +1,9 @@
+project_id = "portiter-blog"
+
+[auth]
+enable_signup = false
+
+[functions.blog-publisher]
+# Cron authenticates with the dedicated x-blog-cron-secret header; the endpoint
+# does not accept user JWTs and validates this secret before doing any work.
+verify_jwt = false

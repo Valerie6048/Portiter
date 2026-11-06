@@ -19,6 +19,8 @@ export default function Footer() {
       <div className="footer-links">
         <Link to="/">{t('navProjects')}</Link>
         <span className="footer-sep">&middot;</span>
+        <Link to="/blog">{t('navBlog')}</Link>
+        <span className="footer-sep">&middot;</span>
         <a href="https://tools.akhmdnzr.fun/">{t('navTools')}</a>
         <span className="footer-sep">&middot;</span>
         <a href="/#contact">{t('navContact')}</a>

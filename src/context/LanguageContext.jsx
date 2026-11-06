@@ -10,6 +10,7 @@ const translations = {
     navSkills: 'Skills',
     navTools: 'Tools',
     navContact: 'Contact',
+    navBlog: 'Blog',
 
     // Hero
     heroRole: 'Machine Learning Engineer & AI Data Scientist',
@@ -160,6 +161,7 @@ const translations = {
     navSkills: 'Keahlian',
     navTools: 'Alat',
     navContact: 'Kontak',
+    navBlog: 'Blog',
 
     // Hero
     heroRole: 'Machine Learning Engineer & AI Data Scientist',

@@ -6,6 +6,7 @@ import { loadEnv } from 'vite';
 import { projectDetails } from '../src/data/projectDetails.js';
 import { plainTextFromContent, readTimeMinutes, renderContentHtml, safeJsonLd } from '../src/blog/content.js';
 import { fetchAllRows } from '../src/blog/pagination.js';
+import { normalizeSupabaseProjectUrl } from '../src/blog/supabase-url.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
@@ -13,7 +14,7 @@ const origin = 'https://www.akhmdnzr.fun';
 const buildEnv = loadEnv(process.env.NODE_ENV || 'production', root, '');
 const template = await readFile(path.join(dist, 'index.html'), 'utf8');
 const projects = Object.entries(projectDetails.en);
-const supabaseUrl = buildEnv.SUPABASE_URL || buildEnv.VITE_SUPABASE_URL;
+const supabaseUrl = normalizeSupabaseProjectUrl(buildEnv.SUPABASE_URL || buildEnv.VITE_SUPABASE_URL);
 const supabaseAnonKey = buildEnv.SUPABASE_ANON_KEY || buildEnv.VITE_SUPABASE_ANON_KEY;
 
 function escapeHtml(value) {

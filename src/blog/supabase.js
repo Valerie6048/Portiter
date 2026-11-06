@@ -1,7 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
+import { normalizeSupabaseProjectUrl } from './supabase-url';
 
 const env = import.meta.env || {};
-export const supabaseUrl = env.VITE_SUPABASE_URL || '';
+export const supabaseUrl = normalizeSupabaseProjectUrl(env.VITE_SUPABASE_URL);
 export const supabaseAnonKey = env.VITE_SUPABASE_ANON_KEY || '';
 export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
 

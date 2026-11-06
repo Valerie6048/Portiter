@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { makeSlug, plainTextFromContent, readTimeMinutes, renderContentHtml, safeContentUrl, safeJsonLd } from '../src/blog/content.js';
 import { fetchAllRows } from '../src/blog/pagination.js';
+import { normalizeSupabaseProjectUrl } from '../src/blog/supabase-url.js';
 
 test('renders text and captions as escaped HTML', () => {
   const html = renderContentHtml({
@@ -59,4 +60,10 @@ test('paginates CMS reads beyond the default API row cap', async () => {
   const expected = Array.from({ length: 1001 }, (_, id) => ({ id }));
   const actual = await fetchAllRows(() => ({ range: async (from, to) => ({ data: expected.slice(from, to + 1), error: null }) }), 'rows');
   assert.deepEqual(actual, expected);
+});
+
+test('uses the project origin when a REST endpoint is pasted as Supabase URL', () => {
+  assert.equal(normalizeSupabaseProjectUrl('https://example.supabase.co/rest/v1/'), 'https://example.supabase.co');
+  assert.equal(normalizeSupabaseProjectUrl('https://example.supabase.co/'), 'https://example.supabase.co');
+  assert.equal(normalizeSupabaseProjectUrl('https://example.supabase.co/dashboard/project'), '');
 });

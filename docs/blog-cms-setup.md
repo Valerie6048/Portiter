@@ -23,6 +23,8 @@ SUPABASE_URL=https://<project-ref>.supabase.co
 SUPABASE_ANON_KEY=<publishable-or-anon-key>
 ```
 
+Gunakan **Project URL** di atas, bukan alamat Data API yang berakhir dengan `/rest/v1`. Kode menerima alamat Data API bila terlanjur ditempel, lalu menggunakan origin proyek untuk Auth, REST, dan Storage.
+
 Jalankan `npm.cmd run dev` untuk membuka situs dan `/admin/login`. Tanpa `.env` atau `.env.local`, blog lokal tampil kosong dan login menjelaskan variabel yang dibutuhkan. Generator build statis juga membaca kedua file tersebut.
 
 Jalankan kedua migrasi dan isi allowlist admin sebelum menjalankan `npm.cmd run build` dengan kredensial proyek. Jika build menampilkan `Could not find the table 'public.portiter_blog_translations' in the schema cache`, migrasi rename belum diterapkan pada proyek yang dituju atau cache API belum segar. Migrasi kedua sudah memanggil `NOTIFY pgrst, 'reload schema'`. Build sengaja berhenti agar halaman dan sitemap tidak terbit dengan data blog kosong.

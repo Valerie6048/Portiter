@@ -113,7 +113,7 @@ export default function AdminPosts() {
 
   return (
     <>
-      <div className="admin-page-title"><div><span className="admin-eyebrow">CONTENT LIBRARY</span><h1>Artikel</h1><p>Kelola semua tulisan dan terjemahan dalam satu tempat.</p></div><Link className="admin-primary" to="/admin/posts/new">＋ Artikel baru</Link></div>
+      <div className="admin-page-title"><div><span className="admin-eyebrow">CONTENT LIBRARY</span><h1>Artikel</h1><p>Kelola semua tulisan dan terjemahan dalam satu tempat.</p></div><div className="admin-title-actions"><Link className="admin-outline-button" to="/admin/posts/generate">✦ Generate artikel</Link><Link className="admin-primary" to="/admin/posts/new">＋ Artikel baru</Link></div></div>
       {error && <div className="admin-banner-error" role="alert">{error}</div>}
       <div className="admin-list-controls"><input className="admin-search-input" type="search" value={query} onChange={(event) => { setQuery(event.target.value); setPage(1); }} placeholder="Cari judul, slug, kategori…" aria-label="Cari artikel"/><select value={locale} onChange={(event) => { setLocale(event.target.value); setPage(1); }} aria-label="Filter bahasa"><option value="all">Semua bahasa</option><option value="en">English</option><option value="id">Bahasa Indonesia</option></select></div>
       <div className="admin-status-tabs">{options.map(([value, label]) => <button type="button" key={value} className={status === value ? 'active' : ''} onClick={() => { setStatus(value); setPage(1); }}>{label}<span>{value === 'all' ? posts.length : posts.filter((post) => statusFor(post) === value).length}</span></button>)}</div>

@@ -2132,6 +2132,12 @@ img { max-width: 100%; display: block; }
 .admin-primary { color: #101923; background: linear-gradient(135deg, #9cbed9, #76b39e); }
 .admin-primary:hover { filter: brightness(1.06); }
 .admin-primary:disabled, .admin-outline-button:disabled { opacity: .5; cursor: wait; }
+.admin-title-actions, .generator-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+.generator-form { display: grid; gap: 18px; max-width: 760px; }
+.generator-form > p, .generator-result span { color: #9ba9bd; font-size: .78rem; line-height: 1.6; }
+.generator-form > .admin-primary { justify-self: start; }
+.generator-result { display: grid; gap: 10px; padding: 15px; border: 1px solid #456a60; border-radius: 9px; background: rgba(42, 113, 91, .13); }
+.generator-result strong { color: #e7ecf4; font-size: .85rem; }
 .admin-outline-button { color: #b4c1d3; background: #192233; border: 1px solid #344258; }
 .admin-outline-button:hover { color: #eaf0f8; border-color: #71849c; }
 .admin-new-post { min-height: 42px; padding: 0 17px; }

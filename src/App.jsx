@@ -15,6 +15,7 @@ const BlogArticle = lazy(() => import('./blog/BlogArticle'));
 const AdminDashboard = lazy(() => import('./admin/AdminDashboard'));
 const AdminPosts = lazy(() => import('./admin/AdminPosts'));
 const AdminPostEditor = lazy(() => import('./admin/AdminPostEditor'));
+const AdminGenerate = lazy(() => import('./admin/AdminGenerate'));
 const AdminMedia = lazy(() => import('./admin/AdminMedia'));
 const AdminTaxonomy = lazy(() => import('./admin/AdminTaxonomy'));
 const AdminPreview = lazy(() => import('./admin/AdminPreview'));
@@ -43,6 +44,7 @@ export default function App() {
               <Route path="/admin" element={<AdminLayout />}>
                 <Route index element={<AdminDashboard />} />
                 <Route path="posts" element={<AdminPosts />} />
+                <Route path="posts/generate" element={<AdminGenerate />} />
                 <Route path="posts/:postId" element={<AdminPostEditor />} />
                 <Route path="media" element={<AdminMedia />} />
                 <Route path="taxonomy" element={<AdminTaxonomy />} />

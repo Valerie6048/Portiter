@@ -67,6 +67,31 @@ Setelah itu jalankan `supabase/cron.sql` lewat SQL Editor. Script membuang jadwa
 
 Perubahan pada artikel publik menambahkan row ke `portiter_blog_deploy_jobs`. Dashboard membedakan `queued`, `triggered`, dan `failed`; job yang gagal memicu Deploy Hook bisa dicoba ulang. Status hasil build dan error kompilasi lengkap dilihat di Vercel.
 
+## Generator artikel dengan Tavily dan Gemini di Vertex AI express mode
+
+Generator tersedia di **Admin → Artikel → Generate artikel**. Masukkan topik dan pilih satu bahasa. Generator memakai Tavily Search dan Extract untuk memperoleh setidaknya tiga sumber yang dapat dibaca, lalu Gemini menyiapkan artikel, ringkasan, SEO, serta saran kategori/tag yang sudah ada. Hasil disimpan sebagai draft; admin memeriksa isi dan tautan sumber di editor sebelum menekan **Terbitkan sekarang**. Cover dapat dipilih dari media library. Bahasa lain tetap draft kosong.
+
+Generator memanggil `gemini-3.8-flash` melalui **Vertex AI express mode pada Google Cloud**, memakai API key `AQ.` yang terikat ke Agent Platform API. Ini berbeda dari `GEMINI_API_KEY` (`AIza`) untuk endpoint Gemini Developer API. Simpan key GCP hanya sebagai secret Supabase Edge Function; jangan menaruhnya di variabel `VITE_*` atau repository.
+
+Set secret berikut secara terpisah di proyek Supabase development dan production sebelum deploy:
+
+| Secret | Isi |
+| --- | --- |
+| `TAVILY_API_KEY` | API key Tavily |
+| `GCP_API_KEY` | API key Vertex AI express mode (`AQ.`) yang diizinkan memakai Agent Platform API |
+| `GEMINI_MODEL` | Opsional; default `gemini-3.8-flash` |
+| `BLOG_GENERATOR_ALLOWED_ORIGINS` | Origin website production, Preview, dan lokal, dipisah koma |
+
+`GEMINI_API_KEY` tidak dipakai untuk alur ini. Key express mode dikirim lewat header `x-goog-api-key` ke endpoint `aiplatform.googleapis.com`. Setelah secret siap, deploy function:
+
+```powershell
+supabase functions deploy blog-generate --project-ref <project-ref>
+```
+
+Isi `BLOG_GENERATOR_ALLOWED_ORIGINS` dengan origin persis untuk website production, Preview, dan lokal yang dipakai; nilai default function hanya mencakup `https://www.akhmdnzr.fun` serta localhost port 5173. Function memerlukan JWT user dan memeriksa allowlist `portiter_blog_admins` sebelum memanggil provider. Simpan key di Supabase Edge Function secrets; kredensial yang hanya tersimpan di Vercel tidak tersedia bagi function ini.
+
+Untuk uji Preview, buat artikel pada proyek Supabase development, periksa kedua pilihan bahasa, sumber, metadata dan cover, lalu terbitkan dan tunggu build Vercel berhasil. Jika penyimpanan draft gagal, hasil generator tetap berada di halaman selama tab belum ditutup sehingga bisa dicoba simpan lagi. Error riset atau Gemini tidak membuat artikel baru.
+
 ## Backup dan pemulihan
 
 Dashboard mengekspor tabel konten dan metadata media ke JSON melalui **Ekspor backup**. **Pulihkan backup** melakukan upsert berdasarkan UUID agar pemulihan bisa diulang tanpa menghapus data tambahan. Gunakan backup yang dipercaya dan periksa proyek tujuan sebelum memulihkan.

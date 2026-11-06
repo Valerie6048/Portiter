@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { FiArrowLeft, FiEye, FiSave } from 'react-icons/fi';
 import BlogEditor from './BlogEditor';
 import { fetchAdminPost, fetchAdminTaxonomy } from '../blog/data';
@@ -39,6 +39,8 @@ function slugFallback(locale) {
 export default function AdminPostEditor() {
   const { postId } = useParams();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const requestedLocale = searchParams.get('locale');
   const { user } = useAdminAuth();
   const [post, setPost] = useState(null);
   const [form, setForm] = useState(null);
@@ -88,7 +90,8 @@ export default function AdminPostEditor() {
       setSelectedCategories(data.categories.map((item) => item.id));
       setSelectedTags(data.tags.map((item) => item.id));
       setMedia(data.media);
-      const first = data.translations.find((item) => item.locale === 'en') || data.translations[0];
+      const first = data.translations.find((item) => item.locale === requestedLocale)
+        || data.translations.find((item) => item.locale === 'en') || data.translations[0];
       if (first) {
         setLocale(first.locale);
         setForm({ ...first, content_json: first.content_json || EMPTY_CONTENT, scheduledLocal: dateTimeLocalInJakarta(first.scheduled_at) });
@@ -99,7 +102,7 @@ export default function AdminPostEditor() {
     };
     initialize().catch((loadError) => active && setError(loadError.message)).finally(() => active && setNewing(false));
     return () => { active = false; };
-  }, [postId, navigate, user.id]);
+  }, [postId, navigate, user.id, requestedLocale]);
 
   const syncRelations = async (postUuid) => {
     const client = requireSupabase();
@@ -234,6 +237,7 @@ export default function AdminPostEditor() {
     const target = post.translations.find((item) => item.locale === nextLocale);
     if (!target) return;
     setLocale(nextLocale);
+    setSearchParams({ locale: nextLocale }, { replace: true });
     setForm({ ...target, content_json: target.content_json || EMPTY_CONTENT, scheduledLocal: dateTimeLocalInJakarta(target.scheduled_at) });
     editCount.current += 1;
     setDirty(false);

@@ -7,3 +7,7 @@ enable_signup = false
 # Cron authenticates with the dedicated x-blog-cron-secret header; the endpoint
 # does not accept user JWTs and validates this secret before doing any work.
 verify_jwt = false
+
+[functions.blog-generate]
+# The browser invokes this function with the signed-in admin's JWT.
+verify_jwt = true
